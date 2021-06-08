@@ -39,6 +39,8 @@ public class LinkedList<E> implements ListI<E>{
         }
     }
 
+
+
     private Node<E> head;
     private Node<E> tail;
     private int currentSize;
@@ -183,6 +185,14 @@ public class LinkedList<E> implements ListI<E>{
             return null;
         }
         return tail.data;
+    }
+
+    public Node<E> getHead() {
+        return head;
+    }
+
+    public Node<E> getTail() {
+        return tail;
     }
 
     public String toString(){
