@@ -7,7 +7,7 @@ public class Hash<K,V> implements HashI<K,V>{
 
     class IteratorHelper<T> implements Iterator<T>{
         T[] keys;
-        int position;
+        int position; 
 
         public IteratorHelper(){
             this.keys = (T[]) new Object[numElements];
