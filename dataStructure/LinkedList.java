@@ -3,8 +3,13 @@ package dataStructure;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedList<E> implements ListI<E>{
+public class LinkedList<E> implements ListI<E>,Iterable<E>{
 
+
+    @Override
+    public Iterator iterator() {
+        return new IteratorHelper();
+    }
 
     class IteratorHelper implements Iterator<E>{
 

@@ -4,20 +4,25 @@ public class Test {
 
     public static void main(String[] args) {
 
-        ListI<Integer> list = new LinkedList<>();
-        int n = 10;
+        Hash hash = new Hash(13);
 
-        for (int i = 0; i < n; i++){
-            list.addFirst(i);
+        for (int i = 0; i < 13; i++){
+            hash.add(String.valueOf(i),i);
+            System.out.println(hash.getTableSize());
+            System.out.println(hash.getValue(String.valueOf(i)));
         }
 
-        System.out.println(list.toString());
-        System.out.println(list.removeFirst());
-        System.out.println(list.removeFirst());
-        System.out.println(list.toString());
-        System.out.println(list.removeLast());
-        System.out.println(list.removeLast());
-        System.out.println(list.toString());
+        for (int i = 0; i < 26; i++){
+            System.out.println(hash.getValue(String.valueOf(i)));
+        }
+
+        hash.add("ab",1);
+        hash.add("ba",2);
+
+
+        System.out.println(hash.getValue("ab"));
+        System.out.println(hash.getValue("ba"));
+
 
     }
 }
