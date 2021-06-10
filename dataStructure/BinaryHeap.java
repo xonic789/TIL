@@ -1,17 +1,19 @@
 package dataStructure;
 
 public class BinaryHeap<E> {
-    int lastPosition;
-    E[] array;
+    private int lastPosition;
+    private E[] array;
 
     public BinaryHeap(int size){
         this.lastPosition = 0;
         array = (E[]) new Object[size];
     }
 
+
     public void add(E obj){
-        array[++lastPosition] = obj;
+        array[lastPosition + 1] = obj;
         trickleUp(lastPosition);
+        lastPosition++;
     }
 
     private void trickleUp(int position) {
@@ -20,7 +22,7 @@ public class BinaryHeap<E> {
         }
         // 부모 인덱스를 찾는 과정.
         int parent = (int) Math.floor((position - 1) / 2);
-        if (((Comparable<E>)array[position]).compareTo(array[parent]) > 0){
+        if (array[parent] == null || ((Comparable<E>)array[position]).compareTo(array[parent]) > 0){
             swap(position,parent);
             trickleUp(parent);
         }
@@ -45,7 +47,7 @@ public class BinaryHeap<E> {
             swap(parent,left);
             return;
         }
-        if (right == lastPosition && ((Comparable<E>)array[parent]).compareTo(array[left]) < 0){
+        if (right == lastPosition && ((Comparable<E>)array[parent]).compareTo(array[right]) < 0){
             swap(parent,right);
             return;
         }
@@ -72,5 +74,22 @@ public class BinaryHeap<E> {
         E tmp = array[from];
         array[from] = array[to];
         array[to] = tmp;
+    }
+
+    public String toString(){
+        String s = "[";
+
+        for (E a : array){
+            s += a + ",";
+        }
+        String substring = s.substring(0, s.length() - 1);
+
+        substring += "]";
+
+        return substring;
+    }
+
+    public int getLastPosition() {
+        return this.lastPosition;
     }
 }

@@ -3,7 +3,12 @@ package dataStructure;
 
 import java.util.Iterator;
 
-public class Hash<K,V> implements HashI<K,V>{
+public class Hash<K,V> implements HashI<K,V>,Iterable{
+
+    @Override
+    public Iterator iterator() {
+        return new IteratorHelper();
+    }
 
     class IteratorHelper<T> implements Iterator<T>{
         T[] keys;

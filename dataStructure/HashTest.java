@@ -1,6 +1,6 @@
 package dataStructure;
 
-public class Test {
+public class HashTest {
 
     public static void main(String[] args) {
 
