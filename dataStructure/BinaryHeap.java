@@ -1,5 +1,7 @@
 package dataStructure;
 
+
+// add 과정 디버깅 할 필요가 있음.
 public class BinaryHeap<E> {
     private int lastPosition;
     private E[] array;

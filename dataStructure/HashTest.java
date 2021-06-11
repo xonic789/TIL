@@ -7,22 +7,12 @@ public class HashTest {
         Hash hash = new Hash(13);
 
         for (int i = 0; i < 13; i++){
-            hash.add(String.valueOf(i),i);
-            System.out.println(hash.getTableSize());
-            System.out.println(hash.getValue(String.valueOf(i)));
+            hash.add(String.valueOf(i),"헤위");
         }
 
-        for (int i = 0; i < 26; i++){
-            System.out.println(hash.getValue(String.valueOf(i)));
+        for (Object key : hash){
+            System.out.println("Key " + key + " value " + hash.getValue(key));
         }
-
-        hash.add("ab",1);
-        hash.add("ba",2);
-
-
-        System.out.println(hash.getValue("ab"));
-        System.out.println(hash.getValue("ba"));
-
 
     }
 }
