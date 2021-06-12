@@ -1,37 +1,24 @@
 package algorithm.inflearn.scanner;
 
+import java.util.*;
 import java.util.Scanner;
 
 public class TestScanner {
 
-    private static boolean isAlphabetic(char chr){
-        if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z')){
-            return true;
-        }
-        return false;
-    }
-
     public static void main(String[] args){
         Scanner in=new Scanner(System.in);
-        char[] tmp = in.nextLine().toCharArray();
-        int lt = 0, rt = tmp.length - 1;
-        char[] target = String.valueOf(tmp).toCharArray();
+        String target = in.nextLine();
+        List<Character> answer = new ArrayList<>();
 
-        while (lt <= rt){
-
-            if (isAlphabetic(target[lt]) && isAlphabetic(target[rt])){
-                char temp = tmp[lt];
-                tmp[lt] = tmp[rt];
-                tmp[rt] = temp;
+        for (int i = 0; i < target.length(); i++){
+            if (target.indexOf(target.charAt(i)) == i){
+                answer.add(target.charAt(i));
             }
-            lt++;
-            rt--;
         }
 
-
-
-        System.out.println(String.valueOf(tmp));
-
+        for(char chr : answer){
+            System.out.print(chr);
+        }
         return ;
     }
 }
