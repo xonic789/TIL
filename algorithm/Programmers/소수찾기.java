@@ -2,7 +2,6 @@ package algorithm.Programmers;
 import java.util.*;
 
 public class 소수찾기 {
-
     private static boolean isPrime(int num){
         if (num < 2){
             return false;
@@ -22,40 +21,50 @@ public class 소수찾기 {
         char[] arr = numbers.toCharArray();
         int n = arr.length;
         Set<Integer> set = new HashSet<>();
-        for (int i = 0; i < n; i++){
-            set.add(arr[i] - '0');
-        }
+        int cnt = 1;
 
-        // 한자리
-        for (int i = 1; i <= n; i++){
-            for (int j = 0; j < i; j++){
-                StringBuilder sb = new StringBuilder();
-                sb.append(arr[j]);
-                for (int k = 0; k < i; k++){
-                    if (j == k){
-                        continue;
-                    }
-                    sb.append(arr[k]);
+        // 처음부터 cnt를 늘려가면서 모든 수를 적재 할 것
+        while(cnt <= n){
+            if (cnt == 1){
+                for (int j = 0; j < n; j++){
+                    set.add(arr[j] - '0');
                 }
-                set.add(Integer.parseInt(sb.toString()));
+            }else {
+                for (int j = 0; j < n; j++){
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(arr[j]);
+                    for (int k = 0; k < n; k++){
+                        if (j == k){
+                            continue;
+                        }
+                        if (cnt > sb.length()){
+                            sb.append(arr[k]);
+                        }
+                        if (sb.length() == cnt){
+
+                            break;
+                        }
+                    }
+                    set.add(Integer.parseInt(sb.toString()));
+                }
             }
+
+            cnt++;
         }
 
 
-
-        for (int number : set){
-            if (isPrime(number)){
-                answer++;
-            }
-        }
+         for (int number : set){
+             if (isPrime(number)){
+                 answer++;
+             }
+         }
 
         return answer;
     }
 
+
     public static void main(String[] args) {
         System.out.println(solution("17"));
         System.out.println(solution("011"));
-
-        System.out.println(3 % 2);
     }
 }
