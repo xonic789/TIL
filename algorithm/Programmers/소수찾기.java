@@ -12,7 +12,6 @@ public class 소수찾기 {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -22,49 +21,34 @@ public class 소수찾기 {
         int n = arr.length;
         Set<Integer> set = new HashSet<>();
         int cnt = 1;
-
+        // n이 되어야 할 수
         // 처음부터 cnt를 늘려가면서 모든 수를 적재 할 것
-        while(cnt <= n){
-            if (cnt == 1){
-                for (int j = 0; j < n; j++){
-                    set.add(arr[j] - '0');
-                }
-            }else {
-                for (int j = 0; j < n; j++){
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(arr[j]);
-                    for (int k = 0; k < n; k++){
-                        if (j == k){
-                            continue;
-                        }
-                        if (cnt > sb.length()){
-                            sb.append(arr[k]);
-                        }
-                        if (sb.length() == cnt){
+        permutation("",numbers,set);
 
-                            break;
-                        }
-                    }
-                    set.add(Integer.parseInt(sb.toString()));
-                }
+        for (int number : set){
+            if (isPrime(number)){
+                answer++;
             }
-
-            cnt++;
         }
-
-
-         for (int number : set){
-             if (isPrime(number)){
-                 answer++;
-             }
-         }
 
         return answer;
     }
 
+    public static void permutation(String prefix, String str, Set<Integer> set) {
+        int n = str.length();
+        if(!prefix.equals("")) {
+            set.add(Integer.valueOf(prefix)); //스트링을 Interger로 변환
+        }
 
+        for (int i = 0; i < n; i++){
+            // prefix를 ""부터 진행시키며, 해당 문자열의 i번째를 매번 prefix와 더해준다.
+            //
+            permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n), set);
+        }
+    }
     public static void main(String[] args) {
         System.out.println(solution("17"));
         System.out.println(solution("011"));
+        System.out.println(solution("0123"));
     }
 }
