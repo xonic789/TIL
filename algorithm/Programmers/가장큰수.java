@@ -8,7 +8,7 @@ public class 가장큰수 {
     public static String solution(int[] numbers){
         String answer = "";
         int n = numbers.length;
-        String[] str = new String[n];
+        String[] str = new String[n];   
 
         for (int i = 0; i < n; i++){
             str[i] = String.valueOf(numbers[i]);
