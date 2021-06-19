@@ -1,7 +1,5 @@
 package dataStructure;
 
-import java.util.Iterator;
-
 /**
  * 기본적인 집합 자료구조 입니다.
  */
