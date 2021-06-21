@@ -15,6 +15,7 @@ public class 부분집합 {
             DFS(L+1);
             ch[L] = 0;
             DFS(L+1);
+
         }
     }
 
