@@ -1,5 +1,7 @@
 package algorithm;
 
+import java.util.Vector;
+
 public class Recursion2 {
 
     void DFS(int n){

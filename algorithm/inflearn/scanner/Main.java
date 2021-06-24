@@ -4,42 +4,34 @@ import java.util.Scanner;
 
 public class Main {
 
-    public String solution(String input){
-        int n = input.length();
-        char[] arr = input.toCharArray();
-        int lt = 0;
-        int rt = n - 1;
-        while (lt < rt){
-            if (isAlpha(arr[lt]) && isAlpha(arr[rt])){
-                swap(arr,lt,rt);
+    public String solution(String s){
+        s += " ";
+        StringBuilder answer = new StringBuilder();
+        int n = s.length() - 1;
+        int cnt = 1;
+        for (int i = 0; i < n; i++){
+            if (s.charAt(i) == s.charAt(i + 1)){
+                cnt++;
+            }else {
+                answer.append(s.charAt(i));
+                if (cnt > 1){
+                    answer.append(cnt);
+                }
+                cnt = 1;
             }
-            lt++;
-            rt--;
         }
-        return String.valueOf(arr);
-    }
 
-    public void swap (char[] arr, int lt, int rt){
-        char tmp = arr[lt];
-        arr[lt] = arr[rt];
-        arr[rt] = tmp;
-        StringBuilder sb = new StringBuilder();
 
-    }
-
-    public boolean isAlpha(char a){
-        if (a >= 'A' && a <= 'Z' || a >= 'a' && a <= 'z'){
-            return true;
-        }
-        return false;
+        return answer.toString();
     }
 
     public static void main(String[] args){
         Scanner in=new Scanner(System.in);
-        Main main = new Main();
-        String input = in.nextLine();
-        System.out.println(main.solution(input));
+        String s = in.nextLine();
 
+        System.out.println(new Main().solution(s));
+
+        System.out.println(0 % 7 == 0);
         return ;
     }
 }

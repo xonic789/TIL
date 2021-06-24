@@ -28,6 +28,7 @@ public class Question6 {
     public List<Integer> solution(int[] arr){
         List<Integer> answer = new ArrayList<>();
         Map<Integer, Integer> map = new HashMap<>();
+
         for (int a : arr){
             if (map.get(a) != null){
                 int tmp = map.get(a);
