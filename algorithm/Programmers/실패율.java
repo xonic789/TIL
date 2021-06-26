@@ -1,26 +1,30 @@
 package algorithm.Programmers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class 실패율 {
 
     public List<Integer> solution(int N, int[] stages){
         Map<Integer, Double> map = new HashMap<>();
-        for (int i = 1; i <= N + 1; i++){
 
+        for (int i = 1; i <= N; i++){
+            int unSolved = 0;
+            int solved = 0;
             for (int j = 0; j < stages.length; j++){
-
-                if (i < stages[i]){
-
-                }else if (i == stages[i]){
-
+                if (i < stages[j]){
+                    solved++;
+                }else if (i == stages[j]){
+                    unSolved++;
                 }
             }
+            if ()
+            map.put(i, (double)unSolved/solved);
         }
+        List<Integer> listKeySet = new ArrayList<>(map.keySet());
 
+        Collections.sort(listKeySet, ((o1, o2) -> (map.get(o2).compareTo(map.get(o1)))));
+
+        return listKeySet;
     }
 
     public static void main(String[] args) {
