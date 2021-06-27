@@ -17,8 +17,10 @@ public class 실패율 {
                     unSolved++;
                 }
             }
-            if ()
-            map.put(i, (double)unSolved/solved);
+            if (solved == 0)
+                map.put(i, 0.0);
+            else
+                map.put(i, (double)unSolved/solved);
         }
         List<Integer> listKeySet = new ArrayList<>(map.keySet());
 
