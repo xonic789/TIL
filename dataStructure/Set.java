@@ -85,4 +85,7 @@ public class Set  {
 
     }
 
+    public int getNum() {
+        return num;
+    }
 }
