@@ -37,9 +37,6 @@ public class BruteForce1 {
 
     public static void main(String[] args) {
         int idx = bfMatch("12345456","456");
-
-
-
     }
 
 
