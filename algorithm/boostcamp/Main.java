@@ -23,12 +23,9 @@ public class Main {
 
 
         int answer = sum;
-        while (rt < n){
-            sum -= arr[lt++];
-            sum += arr[rt++];
-            if (sum > answer){
-                answer = sum;
-            }
+        for (int i = k; i < n; i++){
+            sum += (arr[i] - arr[i-k]);
+            if (sum > answer) answer = sum;
         }
 
         System.out.println(answer);
