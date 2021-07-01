@@ -43,7 +43,7 @@ public class 매출액의종류 {
 
         for (int i = 0; i < n; i++){
             arr[i] = sc.nextInt();
-        } 
+        }
 
         for (int kinds : 매출액의종류.solution(arr,n,k)){
             System.out.print(kinds + " ");
