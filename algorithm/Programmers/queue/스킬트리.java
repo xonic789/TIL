@@ -1,4 +1,4 @@
-package algorithm.Programmers;
+package algorithm.Programmers.queue;
 
 public class 스킬트리 {
 

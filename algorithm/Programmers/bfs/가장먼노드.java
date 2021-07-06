@@ -1,4 +1,4 @@
-package algorithm.Programmers;
+package algorithm.Programmers.bfs;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

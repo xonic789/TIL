@@ -1,4 +1,4 @@
-package algorithm.Programmers;
+package algorithm.Programmers.hash;
 
 import java.util.*;
 

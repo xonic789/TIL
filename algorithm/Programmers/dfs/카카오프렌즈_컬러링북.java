@@ -1,4 +1,4 @@
-package algorithm.Programmers;
+package algorithm.Programmers.dfs;
 
 public class 카카오프렌즈_컬러링북 {
 

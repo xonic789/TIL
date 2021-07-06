@@ -1,4 +1,4 @@
-package algorithm.Programmers;
+package algorithm.Programmers.dfs;
 
 public class 네트워크 {
     public int solution(int n, int[][] computers) {
