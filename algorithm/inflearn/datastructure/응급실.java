@@ -1,22 +1,43 @@
 package algorithm.inflearn.datastructure;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class 응급실 {
 
     public int solution(int n, int m, int[] arr){
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<List<Integer>> queue = new LinkedList<>();
+
 
         for (int i = 0; i < n; i++){
-            queue.offer(arr[i]);
+            List<Integer> list = new ArrayList<>();
+            list.add(arr[i]);
+            list.add(i);
+            queue.offer(list);
         }
+        int answer = 0;
 
-        for (int a : queue){
-            System.out.println(a);
+        while (!queue.isEmpty()){
+            // 환자 꺼냄
+            int len = queue.size();
+            List<Integer> tmp = queue.poll();
+            int p = tmp.get(0);
+            int idx = tmp.get(1);
+
+            for (List<Integer> list : queue){
+                if (p < list.get(0)){
+                    queue.offer(tmp);
+                    break;
+                }
+            }
+
+            if (len > queue.size()){
+                answer++;
+                if (idx == m){
+                    break;
+                }
+            }
         }
-        return 0;
+        return answer;
     }
 
     public static void main(String[] args) {

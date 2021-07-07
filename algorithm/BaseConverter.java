@@ -1,4 +1,4 @@
-package algorithm.inflearn.scanner;
+package algorithm;
 
 
 //바이트 진법 변환 클래스
@@ -20,7 +20,7 @@ public class BaseConverter {
     }
 
     // convert decimal to binaryString
-    private String dec2bin(int dec){
+    public String dec2bin(int dec){
         String bin = "";
         int a = 128;
         int tag = 0;
@@ -105,7 +105,7 @@ public class BaseConverter {
     }
 
     public static void main(String[] args){
-
+        System.out.println(new BaseConverter().dec2bin(1));
 
     }
 }
