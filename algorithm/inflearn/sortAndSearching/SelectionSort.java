@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.inflearn.sortAndSearching;
 
 public class SelectionSort {
 
