@@ -4,12 +4,10 @@ import java.util.Scanner;
 
 public class ScannerArr {
 
-    public int[] getArr(int n){
-        Scanner sc = new Scanner(System.in);
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++){
-            arr[i] = sc.nextInt();
-        }
-        return arr;
+    public static void main(String[] args) {
+        Integer a = 1;
+        Integer b = 2;
+        System.out.println(a + 1 == b);
     }
+
 }

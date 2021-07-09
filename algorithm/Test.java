@@ -18,7 +18,7 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Test().solution("one4seveneight"));
+        System.out.println(Integer.parseInt("-1"));
     }
 
 
