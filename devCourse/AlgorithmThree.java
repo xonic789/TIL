@@ -2,7 +2,9 @@ package devCourse;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 프로그래머스 데브코스 백엔드 과정 3번
+ */
 public class AlgorithmThree {
     private boolean[] check;
     private int count;

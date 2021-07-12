@@ -1,7 +1,9 @@
 package devCourse;
 
 import java.util.Stack;
-
+/**
+ * 프로그래머스 데브코스 백엔드 과정 2번
+ */
 public class AlgorithmTwo {
 
     public Stack<Integer> solution(int[] deposit) {
@@ -19,6 +21,8 @@ public class AlgorithmTwo {
                 while (content < 0){
                     content += stack.pop();
                 }
+                // 0 일 경우 입금해야할 필요가 없기 때문에 .
+                // 0이 아닐 경우에만.
                 if (content != 0){
                     stack.push(content);
                 }

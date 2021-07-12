@@ -1,5 +1,8 @@
 package devCourse;
 
+/**
+ * 프로그래머스 데브코스 백엔드 과정 1번
+ */
 public class AlgorithmOne {
 
     public int solution(int[] d, int m) {
