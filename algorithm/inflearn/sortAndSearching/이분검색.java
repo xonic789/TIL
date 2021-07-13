@@ -17,16 +17,15 @@ public class 이분검색 {
         System.out.println(new 이분검색().binarySearch(arr, n, m));
     }
 
-    private int binarySearch(int[] arr, int n, int m) {
+    public int binarySearch(int[] arr, int n, int m) {
 
-        int idx;
-        int answer = 0;
+        int idx = 0;
         int lt = 0, rt = n - 1;
         while (lt <= rt){
             int middle = (rt + lt) / 2;
 
             if (arr[middle] == m){
-                answer = middle + 1;
+                idx = middle;
                 break;
             }
 
@@ -36,6 +35,19 @@ public class 이분검색 {
         }
 
 
-        return answer;
+        return idx;
+    }
+
+    public int linearSearch(int[] arr, int n, int m){
+
+        int idx = 0;
+
+        for (int i = 0; i < n; i++){
+            if (m == arr[i]) idx = i;
+        }
+
+        if (arr[idx] != m) idx = -1;
+
+        return idx;
     }
 }
