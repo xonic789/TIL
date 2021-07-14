@@ -11,7 +11,7 @@ public class Test {
             }
         }
         System.out.println(cnt);
-
+     
     }
 
     public static void main(String[] args) {
