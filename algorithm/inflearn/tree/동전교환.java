@@ -1,5 +1,7 @@
 package algorithm.inflearn.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class 동전교환 {
@@ -19,19 +21,28 @@ public class 동전교환 {
     }
 
     private int solution(int[] arr, int n, int m) {
-        DFS(arr,n,m,0,0);
 
-        return min;
+        return BFS(arr,n,m);
     }
 
-    public void DFS(int[] arr, int n, int m, int sum, int L){
-        if (sum == m) {
-
+    public int BFS(int[] arr,int n, int m){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(m);
+        int L = 0;
+        while (!queue.isEmpty()){
+            int len = queue.size();
+            for (int i = 0; i < len; i++){
+                int coin = queue.poll();
+                for (int j = 0; j < n; j++){
+                    int tmp = coin - arr[j];
+                    if (tmp == 0) return L + 1;
+                    if (tmp > 0){
+                        queue.offer(tmp);
+                    }
+                }
+            }
+            L++;
         }
-        if (L == n){
-            return;
-        }
-
-
+        return -1;
     }
 }
