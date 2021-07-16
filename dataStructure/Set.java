@@ -17,7 +17,7 @@ public class Set  {
            if (!contains(array[i])){
                set[num] = array[i];
                num++;
-           }
+           }     
         }
     }
 
