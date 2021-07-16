@@ -1,5 +1,7 @@
 package dataStructure;
 
+import java.util.LinkedHashSet;
+
 /**
  * 기본적인 집합 자료구조 입니다.
  */
@@ -29,6 +31,7 @@ public class Set  {
         }
     }
 
+    // default size is 10
     public Set(){
         max = 10;
         num = 0;
@@ -48,6 +51,42 @@ public class Set  {
             return true;
         }
         return false;
+    }
+
+    /**
+     * remove 는 element 가 set[num - 1] 안에 포함되어 있다면 삭제하는 메서드이기 때문에
+     * 해당 element 가 num - 1 부분 즉 끝 부분일 경우와 끝 부분이 아닐 경우로 나뉜다.
+     * 왜냐하면 배열의 깊은 복사가 이루어져야 하는데,
+     * 해당 element 를 제외하고 복사해야하기 때문이다.
+     * 내가 생각하는 방법은
+     * 1. 끝 부분이 아닐 경우 element Index 의 바로 다음 인덱스부터 tmp 배열에 넣는다.
+     * 2. 끝 부분일 경우 해당 index 를 0으로 초기화 하고, num--를 해준다.
+     * @param element
+     * @return
+     */
+    public boolean remove(int element){
+        // max size == 0
+        if (max == 0) return false;
+
+        if (!contains(element)) return false;
+
+        int index = indexOf(element);
+        // num 은 set 의 크기이기 때문이다.
+        if (index + 1 < num){
+            int[] tmp = new int[max];
+            for (int i = 0; i < num; i++){
+                if (index == i) tmp[i] = set[++i];
+                else tmp[i] = set[i];
+            }
+            num--;
+            set = tmp;
+        // num 과 같은 경우
+        }else {
+            set[index] = 0;
+            num--;
+        }
+
+        return true;
     }
 
     public void copyArray(){

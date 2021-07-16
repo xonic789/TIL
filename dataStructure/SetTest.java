@@ -16,6 +16,7 @@ public class SetTest {
         set.add(656);
         set.add(1254);
         set.add(1254);
+        set.remove(1);
 
         System.out.println(set);
     }
