@@ -1,4 +1,4 @@
-package dataStructure;
+package dataStructure.list;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -88,6 +88,10 @@ public class LinkedList<E> implements ListI<E>,Iterable<E>{
         currentSize++;
     }
 
+    public void add(E obj){
+        addLast(obj);
+    }
+
     public E removeFirst(){
         if (head == null){
             return null;
@@ -140,7 +144,7 @@ public class LinkedList<E> implements ListI<E>,Iterable<E>{
         // head 부터 current 가 null 일 때까지 반복하여
         while (current != null){
             // 매 번 두 객체를 비교하여, argument obj 와 current.data를 비교했을 때
-            // compareTo가 0을 retturn 한다면, 요소가 같다는 것이기 때문에
+            // compareTo가 0을 return 한다면, 요소가 같다는 것이기 때문에
             // head 와 tail pointer 를 비교하여 바로 삭제한다.
             if (contains(obj)){
                 // current 가 head 와 pointer 가 같다면,
