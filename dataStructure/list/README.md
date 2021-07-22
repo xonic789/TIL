@@ -5,6 +5,8 @@
 >Java 1.5 이상 문법을 이용하여 작성한 것으로,
 >Iterable, Iterator, Generic 등을 이용하여 구현하였습니다.
 
+<br/>
+
 <img src="../../image/LinkedList.png">
 
 출처 : [https://www.java67.com/2016/01/how-to-implement-singly-linked-list-in-java-using-generics-example.html](https://www.java67.com/2016/01/how-to-implement-singly-linked-list-in-java-using-generics-example.html)
