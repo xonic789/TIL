@@ -1,16 +1,13 @@
-<img src="../../image/LinkedList.png">
-
-출처 : [https://www.java67.com/2016/01/how-to-implement-singly-linked-list-in-java-using-generics-example.html](https://www.java67.com/2016/01/how-to-implement-singly-linked-list-in-java-using-generics-example.html)
-
 > 해당 구현 내용은, 프로그래밍 언어에 대한 기초가 있어야 이해 가능합니다.
-> 
+>
 >reference variable (비슷한 개념으로는 pointer 가 있음), 반복자 등의 개념 설명은 따로 하지 않습니다.
-> 
+>
 >Java 1.5 이상 문법을 이용하여 작성한 것으로,
 >Iterable, Iterator, Generic 등을 이용하여 구현하였습니다.
 
+<img src="../../image/LinkedList.png">
 
-
+출처 : [https://www.java67.com/2016/01/how-to-implement-singly-linked-list-in-java-using-generics-example.html](https://www.java67.com/2016/01/how-to-implement-singly-linked-list-in-java-using-generics-example.html)
 
 ## 🔗 LinkedList란?
 
