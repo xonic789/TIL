@@ -1,4 +1,4 @@
-package algorithm.Programmers;
+package algorithm.programmers;
 
 public class 방금그곡 {
 

@@ -1,4 +1,4 @@
-package algorithm.Programmers;
+package algorithm.programmers;
 
 public class 곱합단계구하기 {
 

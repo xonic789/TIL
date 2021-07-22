@@ -1,4 +1,4 @@
-package algorithm.Programmers.greedy;
+package algorithm.programmers.greedy;
 
 
 public class 조이스틱 {

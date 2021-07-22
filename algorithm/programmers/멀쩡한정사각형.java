@@ -1,4 +1,4 @@
-package algorithm.Programmers;
+package algorithm.programmers;
 
 public class 멀쩡한정사각형 {
 

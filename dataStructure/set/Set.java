@@ -1,4 +1,4 @@
-package dataStructure;
+package dataStructure.set;
 
 import java.util.LinkedHashSet;
 

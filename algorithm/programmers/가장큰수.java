@@ -1,7 +1,6 @@
-package algorithm.Programmers;
+package algorithm.programmers;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class 가장큰수 {
 

@@ -1,4 +1,4 @@
-package algorithm.Programmers.bfs;
+package algorithm.programmers.bfs;
 
 public class 점프와순간이동 {
 

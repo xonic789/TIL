@@ -1,4 +1,4 @@
-package algorithm.Programmers;
+package algorithm.programmers;
 import java.util.*;
 
 public class 소수찾기 {

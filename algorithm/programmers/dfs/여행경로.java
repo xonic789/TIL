@@ -1,4 +1,4 @@
-package algorithm.Programmers.dfs;
+package algorithm.programmers.dfs;
 
 import java.util.*;
 

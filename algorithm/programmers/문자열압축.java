@@ -1,6 +1,4 @@
-package algorithm.Programmers;
-
-import java.util.Stack;
+package algorithm.programmers;
 
 public class 문자열압축 {
     public static int solution(String s) {

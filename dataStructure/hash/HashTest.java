@@ -1,4 +1,4 @@
-package dataStructure;
+package dataStructure.hash;
 
 public class HashTest {
 

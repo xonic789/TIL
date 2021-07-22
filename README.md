@@ -1,7 +1,16 @@
 #TIL
 
-조만간 정리 예정.
-Set, HashTable, LinkedList 등 구현
-프로그래머스 데브코스 준비중 ~07.26
-2021-07-20 면접 
- 
+## 0. 목차
+[1. Data Structure](#1-data-structure)
+
+[9. PS](#9-PS)
+
+
+
+## 1. Data Structure
+1. [Set](dataStructure/set/README.md)
+2. [Linked List](dataStructure/list/README.md)
+3. [Hash Table](dataStructure/hash/README.md)
+4. [Binary Heap](dataStructure/heap/README.md)
+
+## 9. PS

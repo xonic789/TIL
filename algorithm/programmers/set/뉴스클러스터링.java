@@ -1,4 +1,4 @@
-package algorithm.Programmers.set;
+package algorithm.programmers.set;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package algorithm.Programmers.bfs;
+package algorithm.programmers.bfs;
 
 import java.util.LinkedList;
 import java.util.Queue;

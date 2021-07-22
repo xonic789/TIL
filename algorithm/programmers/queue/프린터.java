@@ -1,4 +1,4 @@
-package algorithm.Programmers.queue;
+package algorithm.programmers.queue;
 
 import java.util.*;
 

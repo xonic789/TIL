@@ -1,4 +1,4 @@
-package algorithm.Programmers.dfs;
+package algorithm.programmers.dfs;
 
 public class 타겟넘버 {
     private int n;
