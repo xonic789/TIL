@@ -1,4 +1,4 @@
-#Today I Learned 
+# Today I Learned 
 
 >## 0. 목차
 >[1. Data Structure](#1-data-structure)
