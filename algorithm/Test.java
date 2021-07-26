@@ -1,14 +1,16 @@
 package algorithm;
 
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class Test {
 
 
     public static void main(String[] args) {
+
+        List<Long> list = new ArrayList<>();
+
+        list.sort((a,b) -> b.compareTo(a));
     }
 
 

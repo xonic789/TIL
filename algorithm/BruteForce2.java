@@ -1,5 +1,7 @@
 package algorithm;
 
+import java.util.Arrays;
+
 public class BruteForce2 {
 
     static int bfMatch(String text, String pattern){
@@ -12,6 +14,7 @@ public class BruteForce2 {
             StringBuilder sb = new StringBuilder();
             System.out.println(text);
             count++;
+
             if (text.charAt(pt) == pattern.charAt(pp)){
 
                 for (int i = 0; i < pt; i++){
