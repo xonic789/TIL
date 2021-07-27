@@ -9,7 +9,7 @@
 
 <img src="../../image/LinkedList.png">
 
-출처 : [https://www.java67.com/2016/01/how-to-implement-singly-linked-list-in-java-using-generics-example.html](https://www.java67.com/2016/01/how-to-implement-singly-linked-list-in-java-using-generics-example.html)
+이미지 출처 : [https://www.java67.com/2016/01/how-to-implement-singly-linked-list-in-java-using-generics-example.html](https://www.java67.com/2016/01/how-to-implement-singly-linked-list-in-java-using-generics-example.html)
 
 ## 🔗 LinkedList란?
 
@@ -19,32 +19,24 @@
 > ## 목차
 >[1. 배열과의 차이점은?](#1-배열과의-차이점은)
 > 
->[2. 자료구조 설계할 때 유의점](#2-자료구조-설계할-때-유의점)
-> 
->[3. LinkedList의 시간복잡도](#3-LinkedList의-시간복잡도)
+>[2. LinkedList의 시간복잡도](#2-LinkedList의-시간복잡도)
 >
->[4. 구현 코드 설명](#4-구현-코드-설명)
+>[3. 구현 코드 설명](#3-구현-코드-설명)
 >
->[5. 구현 코드](#5-구현-코드)
+>[4. 구현 코드](#4-구현-코드)
 
 
 <br/>
 
-### 1. 배열과의 차이점은?
-- 배열은 생성부터 크기를 지정해야하고,
-- 연속된 메모리 공간을 사용한다.
-- 그렇기 때문에 배열의 중간에 추가, 삭제시 O(n)의 시간복잡도를 가진다.
-- 한번 선언된 길이는 변경할 수 없다.
+## 1. 배열과의 차이점은?
+- 배열은 생성부터 크기를 지정해야하고, -> **크기를 지정하지 않는다.**
+- 연속된 메모리 공간을 사용한다. -> **Node라는 클래스의 next 포인터로 연결하므로 연속된 메모리 공간은 아니다.**
+- 그렇기 때문에 배열의 추가 및 삭제는 실질적으로 불가능하다 (가능은 하지만 해당 인덱스를 null이나 0으로 초기화 하는 수 밖에 없다.) -> **추가는 tail의 next를 연결하는 방법으로 가능하다. 삭제는 해당 index 또는 해당 value를 비교하여 이 전 Node의 next를 해당 index 또는 value의 Node의 next로 바꿔주며 삭제한다. (garbage collection 이 처리)**
+- 한번 선언된 길이는 변경할 수 없다. -> **크기를 지정하지 않는다.**
   <br/>
-### 2. 자료구조 설계할 때 유의점
-
-1. 자료 구조가 <span style="color: #b71c1c">비어 있을 때</span>
-2. 요소가 <span style="color: #b71c1c">하나만 있을 때</span>
-3. **시작점**의 요소 **추가 / 제거**
-4. **끝 점**의 요소 **추가 / 제거**
-5. **중간**의 요소에 대한 작업
-   <br/>
-### 3. LinkedList의 시간복잡도
+  
+## 2. LinkedList의 시간복잡도
+- 데이터의 탐색 ```O(n)```
 - 데이터의 추가 ```O(1)```
     1. 처음과 끝 추가 ```O(1)```
     2. 중간 요소 추가 ```O(n)```
@@ -53,7 +45,7 @@
     1. 처음과 끝 삭제 ```O(1)```
     2. 중간 요소 삭제 ```O(n)```
        <br/>
-### 4. 구현 코드 설명
+## 3. 구현 코드 설명
 
 구현해본 ```LinkedList``` 는,
 
@@ -75,13 +67,11 @@
 
 <br/>
 
-### 5. 구현 코드
-### [LinkedList 구현 코드](./LinkedList.java)
+## [4. 구현 코드](./LinkedList.java)
 
+<br/>
 
 ### 구현을 마치며
 - 다음 자료구조 포스팅에서는 구현된 ```LikedList```를 이용하여 ```Hash Table``` 을 구현할 예정이다.
 - 막상 직접 구현하려니 어려웠다🤣
 
-
-혹시라도 틀린게 있거나 불편한거 있으시면 댓글 달아주세요!!

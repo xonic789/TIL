@@ -120,7 +120,8 @@ public class Hash<K,V> implements HashI<K,V>,Iterable{
 
     private int hashcode(K key){
         int hashVal = key.hashCode();
-        hashVal = hashVal % 0x7FFFFFFF;
+        // 0111 1111 1111 1111 1111 1111 1111 1111 & 연산 -> MSB (최상위 비트) 만 1(음수)이라면 0(양수)으로 바꿔준다.
+        hashVal = hashVal & 0x7FFFFFFF;
         hashVal = hashVal % tableSize;
         return hashVal;
     }

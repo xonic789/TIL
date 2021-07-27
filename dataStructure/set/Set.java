@@ -74,9 +74,11 @@ public class Set  {
         // num 은 set 의 크기이기 때문이다.
         if (index + 1 < num){
             int[] tmp = new int[max];
+            int pt = 0;
             for (int i = 0; i < num; i++){
-                if (index == i) tmp[i] = set[++i];
-                else tmp[i] = set[i];
+                if (index == i) tmp[i] = set[++pt];
+                else tmp[i] = set[pt];
+                pt++;
             }
             num--;
             set = tmp;
@@ -105,7 +107,7 @@ public class Set  {
     public int indexOf(int element){
         for (int i = 0; i < num; i++){
             if (set[i] == element){
-                return element;
+                return i;
             }
         }
         return -1;
