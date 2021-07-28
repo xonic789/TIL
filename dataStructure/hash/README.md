@@ -13,16 +13,18 @@
 이미지 출처 : [https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%ED%85%8C%EC%9D%B4%EB%B8%94](https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%ED%85%8C%EC%9D%B4%EB%B8%94)
 
 > ## 목차
->[1. What is Hash Table?](#1-what-is-hash-table)
+>1. [What is Hash Table?](#1-what-is-hash-table)
+>   - [What is Hash Function?](#what-is-hash-function-)
 >
-> - [What is Hash Function?](#what-is-hash-function-)
->
->[2. Time Complexity](#2-LinkedList의-시간복잡도)
->
->[3. Code Description](#3-구현-코드-설명)
-> - [load factor](#load-factor) 
 > 
->[4. Implementation](#4-구현-코드)
+>2. [Time Complexity](#2-hashtable-time-complexity)
+>
+> 
+>3. [Code Description](#3-code-description)
+>    - [load factor](#load-factor) 
+> 
+> 
+>4. [Implementation](./Hash.java)
 
 ## 1. What is Hash Table?
 

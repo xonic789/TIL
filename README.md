@@ -9,7 +9,9 @@
  
 
 ## 1. Data Structure
+
 - **자료구조를 설계 할 때 유의한 점**
+
     1. 자료 구조가 <span style="color: #b71c1c">비어 있을 때</span>
     2. 요소가 <span style="color: #b71c1c">하나만 있을 때</span>
     3. **시작점**의 요소 **추가 / 제거**
