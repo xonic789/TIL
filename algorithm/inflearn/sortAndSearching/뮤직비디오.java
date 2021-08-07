@@ -41,6 +41,7 @@ public class 뮤직비디오 {
     public int solution(int n, int m, int[] arr) {
         int answer = 0;
         //반복자, 리덕션
+
         int lt = Arrays.stream(arr).max().getAsInt();
         int rt = Arrays.stream(arr).sum();
         // 이분검색을 취한다.
