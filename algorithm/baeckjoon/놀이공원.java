@@ -59,8 +59,7 @@ public class 놀이공원 {
             if (sum >= n) {
                 index = middle;
                 right = middle - 1;
-            }
-            else left = middle + 1;
+            }else left = middle + 1;
         }
         return index;
     }
