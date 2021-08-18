@@ -10,7 +10,6 @@ public class BOJ_10808_알파벳개수 {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
         String input = sc.nextLine();
         int[] arr = new int[26];
 //        char ch = 'a';
