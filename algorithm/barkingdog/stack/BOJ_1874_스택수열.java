@@ -18,30 +18,24 @@ public class BOJ_1874_스택수열 {
             list.add(Integer.parseInt(st.nextToken()));
         }
 
-        List<String> result = new ArrayList<>(n);
+        StringBuilder sb = new StringBuilder();
 
 
         int idx = 0;
         for (int i = 1; i <= n; i++){
            stack.push(i);
-           result.add("+");
+           sb.append("+\n");
 
-           while (!stack.isEmpty() && stack.peek() == list.get(idx)){
+           while (!stack.isEmpty() && Objects.equals(stack.peek(), list.get(idx))){
                idx++;
                stack.pop();
-               result.add("-");
+               sb.append("-\n");
            }
         }
 
-        if (!stack.isEmpty()) bw.write("NO");
+        if (!stack.isEmpty()) System.out.println("NO");
         else {
-            for (String s : result) {
-                bw.write(s);
-            }
+            System.out.println(sb);
         }
-
-
-        bw.flush();
-
     }
 }
