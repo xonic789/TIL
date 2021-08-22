@@ -1,4 +1,4 @@
-package algorithm.wadiz;
+package algorithm.codingtest.wadiz;
 
 import java.util.*;
 

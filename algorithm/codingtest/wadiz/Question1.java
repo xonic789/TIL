@@ -1,4 +1,4 @@
-package algorithm.wadiz;
+package algorithm.codingtest.wadiz;
 
 public class Question1 {
     public int solution(int[][] passwords, String s) {

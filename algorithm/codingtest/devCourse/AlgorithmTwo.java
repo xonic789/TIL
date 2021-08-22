@@ -1,4 +1,4 @@
-package devCourse;
+package algorithm.codingtest.devCourse;
 
 import java.util.Stack;
 /**
