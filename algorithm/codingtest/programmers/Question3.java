@@ -8,7 +8,11 @@ public class Question3 {
     public static void main(String[] args) {
         String word = "BAB";
         String[] cards = {"ZZBZ", "BAZB","XBXB","XBAX"};
-
+        long sum = 0;
+        for (int i = 79999; i >= 0; i--){
+            sum += i;
+        }
+        System.out.println(sum);
         System.out.println(new Question3().solution(word, cards));
     }
 
@@ -19,7 +23,7 @@ public class Question3 {
         DFS(0, 0, word,"",cards);
         return answer / 2;
     }
- 
+
     public void DFS(int index, int y, String word, String res, String[] cards){
         if (res.equals(word)) {
             answer++;
