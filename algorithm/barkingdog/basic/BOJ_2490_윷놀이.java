@@ -9,9 +9,9 @@ public class BOJ_2490_윷놀이 {
         String res = "DCBAE";
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             int cnt = 0;
-            for (int j = 0; j < 4; j++){
+            for (int j = 0; j < 4; j++) {
                 cnt += sc.nextInt();
             }
             sb.append(res.charAt(cnt) + "\n");
