@@ -11,22 +11,51 @@ public class BOJ_2504_괄호의값 {
     public int solution(String input){
         int answer = 0;
         int n = input.length();
-        Stack<Character> stack = new Stack<>();
+        Stack<String> stack = new Stack<>();
         List<Character> list = new ArrayList<>();
         for (int i = 0; i < n; i++){
             char ch = input.charAt(i);
             // 열 때 스택에 적재
             if (ch == '(' || ch == '['){
-                stack.push(ch);
-            }else {
+                stack.push(String.valueOf(ch));
+            }else if (ch == ')'){
                 // 닫는 괄호인데 비어있다면 잘못된 괄호
                 if (stack.isEmpty()) return 0;
-                // 끝 참조
-                char peek = stack.peek();
-
+                if (input.charAt(i - 1) == '('){
+                    stack.pop();
+                    stack.push("2");
+                }else {
+                    int tmp = 0;
+                    String peek;
+                    while (!stack.isEmpty() && !(peek = stack.peek()).equals("(")){
+                        if (peek.equals("[")) return 0;
+                        tmp += Integer.parseInt(stack.pop());
+                    }
+                    stack.pop();
+                    stack.push(String.valueOf(tmp * 2));
+                }
+            }else {
+                if (stack.isEmpty()) return 0;
+                if (input.charAt(i - 1) == '['){
+                    stack.pop();
+                    stack.push("3");
+                }else {
+                    int tmp = 0;
+                    String peek;
+                    while (!stack.isEmpty() && !(peek = stack.peek()).equals("[")){
+                        if (peek.equals("(")) return 0;
+                        tmp += Integer.parseInt(stack.pop());
+                    }
+                    stack.pop();
+                    stack.push(String.valueOf(tmp * 3));
+                }
             }
         }
-
+        while (!stack.isEmpty()){
+            String str = stack.peek();
+            if (str.equals("[") || str.equals("]") || str.equals("(") || str.equals(")")) return 0;
+            answer += Integer.parseInt(stack.pop());
+        }
 
         return answer;
     }
