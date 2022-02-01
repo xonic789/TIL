@@ -1,0 +1,124 @@
+# 운영체제의 역사
+
+### ~ 1940년대 NO O/S
+
+### 1940년대 말~
+
+- 하드웨어 발전 vs 운영체제 기술 발전
+- Card reader → memory → processing → line printer
+- Batch processing System (일괄 처리) - resident monitor (**최초의 O/S**)
+    - 초창기에는 proccesor, Memory가 있다고 치면
+    - Memory → O/S 밑에 userProgram이 하나만 들어간다.
+    - CPU → I/O 반복적으로 동작한다고 했을 때,
+    - 처음엔 CPU가 실행되고, I/O가 실행된다면 CPU가 할일이 없다. I/O가 끝날 때까지 (CPU가 놀게된다 idle)
+    - CPU는 빠르고 I/O는 느리다..
+
+### 1960년대
+
+- Multiprogramming System (다중 프로그래밍) (
+    - 컴퓨터는 비싼 자원
+    - 빠른 CPU, 느린 I/O → 메모리에 **여러개의 job (user program을 여러개 두자)**
+    - CPU가 쓰이고, user program1에서 I/O가 돌아갈 때 CPU를 user program2의 처리를 하게 하는 방식.
+    - I/O가 돌아갈 때 다른 job의 처리를 하게 한다. → CPU의 이용률이 높아진다 (idle 시간이 줄어든다)
+    - CPU schedunling, 메모리 관리, 보호
+    - **고민**
+        - **CPU schedunling** (어떤 job을 처리 할 것인지, 어떻게 하면 CPU의 성능을 더 좋게 할지)
+        - **메모리 관리** (job을 어느 위치에 배치할까, 프로그램이 종료되면 새로운 프로그램을 어느 부분에 넣으면 좋을까 등)
+        - **보호** (하나의 프로그램이 다른 프로그램을 침범하는 등)
+
+### 1960~ 1970년대
+
+- 모니터, 키보드가 나옴.
+- 하나의 컴퓨터의 수 많은 단말기를 달아서 사용했다.
+- CPU가 하나밖에 없기 때문에 하나의 단말기가 사용한다면 다른 단말기는 사용하지 못하게 됨.
+- Time-Sharing System (시공유 시스템, TSS) , (UNIX → Linux)
+    - 강제 절환(switching한다) , Interactive System (대화형)
+    - **가상 메모리, 프로세스간 통신, 동기화 (**synchronized)
+    - 짧은 시간동안 job1, job2로 스위칭을 해준다.
+    - 멀티 프로그래밍은 I/O일 때 다른 일을 처리하게 되는데, 시공유 시스템은 CPU가 시간에 따라 다른 일을 처리하게 만든다.
+    - 하드디스크를 메인메모리인냥 사용할 수 있도록 하는 기술이 나옴. (가상 메모리)
+
+## 운영체제의 천이
+
+### 컴퓨터 규모별 분류
+
+- Supercomputer > Mainframe > Mini > Micro
+- Supercomputer > Server > Workstation > PC > Handheld (노트북, 스마트폰) > Embedded (자동차의 ABS, 세탁기, 냉장고 등)
+
+### 고성능 컴퓨터의 OS 기술이 Handheld/Embedded 까지
+
+- Batch processing
+- Multiprogramming
+- Timesharing
+ 
+![cpu,process](https://user-images.githubusercontent.com/64122884/151969824-ed184420-f6db-4b02-88a5-c41ba460ef4f.png)   
+    
+
+### 고등 컴퓨터 구조 (Advanced Computer Architectures)
+
+- 고등 운영체제의 등장
+
+![고등컴퓨터구조](https://user-images.githubusercontent.com/64122884/151969831-b51dfea0-4c68-4616-ae10-7474f6aa68d7.png)
+
+
+## 다중 프로세서 시스템 (Multiprocessor system)
+
+- 병렬 시스템 (parallel system)
+- 강결합 시스템(tightly-coupled system)
+- 3가지 장점 : performance(성능), cost(비용), reliability(신뢰도)
+    - 하나의 일꾼을 두는 것보단 여러 일꾼을 두는게 퍼포먼스 측면에서 더 낫다
+    - 성능이 좋은 CPU 하나보단 그 성능보다 절반 되는 CPU를 여러개 다는 것이 일반적으로 저렴하다.
+    - 한 개의 CPU가 죽어도 다른 CPU는 여전히 작동한다.
+- 다중 프로세서 운영체제 (Multiprocessor OS) : Linux, Windows 등등
+
+## 분산 시스템 (Distributed system)
+
+- 여러 컴퓨터를 LAN으로 묶는다.
+- 서로 간에 계산을 하면서 메시지를 주고 받으며 처리한다.
+- 다중 컴퓨터 시스템 (multi-computer system)
+- 소결합 시스템 (loosely-coupled system)
+- 분산 운영체제 (Distributed OS)
+
+## 실시간 시스템 (Real-time system)
+
+- 단순하게 빠르게 처리되는게 아니라 반드시 시간 내에 끝나야한다.
+- 시간 제약 : Deadline
+- 공장 자동화(FA), 군사, 항공, 우주
+- 실시간 운영체제 (Real-time OS = RTOS)
+
+## 인터럽트
+
+- **인터럽트** : 가로채기
+- 현대 운영체제는 인터럽트 기반 시스템
+- 부팅이 끝나면?
+    - 운영체제는 메모리에 **상주** (resident)
+    - 사건 (event)을 기다리며 **대기** : 키보드, 마우스, ....
+- 하드웨어 인터럽트 (Hardware interrupt)
+    - 인터럽트 결과 운영체제 내의 특정 코드 실행 (**ISR**)
+        - 예를들어 마우스 움직임. (마우스 서비스 루틴이 호출된다, CPU는 하던 일을 중지하고 OS의 서비스 루틴으로 점프한다 처리후 소프트웨어로 돌아감)
+    - **Interrupt Service Routine** 종류 후 다시 대기
+- 소프트웨어 인터럽트 (Software interrupt)
+    - 사용자 프로그램이 실행되면서 소프트웨어 인터럽트 (운영체제 서비스 이용 위해)
+    - 여기서 **파일을 읽거나 쓰거나 하는 처리는 OS 내의 ISR에서 처리**하게 된다. 처리 한 후 다시 소프트웨어로 돌아온다.
+        - 왜냐하면 없다면 모든 소프트웨어에 그런 처리를 따로 해줘야하기 때문이다. (중복이 안되도록)
+    - 인터럽트 결과 운영체제 내의 특정 코드 실행 (ISR)
+    - ISR 종료 후 다시 사용자 프로그램으로.
+
+### 인터럽트 기반 운영체제
+
+- 운영체제는 평소에는 대기 상태
+    - 하드웨어 인터럽트에 의해 운영체제 코드 (ISR) 실행
+    - 소프트웨어 인터럽트에 의해
+    - 내부 인터럽트(Internal interrupt)에 의해
+- ISR 종료되면
+    - 원래의 대기상태 또는 사용자 프로그램으로 복귀
+- 인터럽트 기반 운영체제
+
+### 정리
+
+- O/S는 평소에 아무 일도 안하다가
+- event (마우스 움직이거나, 키보드 누르거나 등등) 발생하면 (Hardware Interrupt)
+- O/S의 해당 event에 맞는 ISR로 CPU가 점프해서 처리한다.
+- User Program을 실행하면 Hardware Interrupt (마우스 더블클릭하면 해당 디스플레이 내의 좌표를 찾아서 해당 파일이 하드디스크 어디에 위치해있는지 ISR 실행) 처리 후 Memory에 올린다.
+- 해당 User Program이 Software Interrupt가 필요하면 (하드디스크 ISR, 프린터 ISR 등등) 해당 소프트웨어가 발생시킨 인터럽트를 기반으로 CPU가 해당 ISR로 점프해서 처리 후 해당 UserProgram으로 돌아간다.
+- 결론적으로 현대의 운영체제는 현재 인터럽트 기반 운영체제이다.
