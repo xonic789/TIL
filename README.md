@@ -1,7 +1,7 @@
 # Today I Learned 
 
 >## 0. 목차
->[1. JAVA]()
+>[1. JAVA](#1-java)
 >   1. [basic Java]()
 >
 >[2. Data Structure](#2-data-structure)
