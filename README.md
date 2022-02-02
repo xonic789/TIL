@@ -2,7 +2,7 @@
 
 >## 0. 목차
 >[1. JAVA](#1-java)
->   1. [basic Java]()
+>   1. [basic Java](basicJava)
 >
 >[2. Data Structure](#2-data-structure)
 >   1. [Set](dataStructure/set/README.md)
@@ -42,7 +42,6 @@
 3. **시작점**의 요소 **추가 / 제거**
 4. **끝 점**의 요소 **추가 / 제거**
 5. **중간**의 요소에 대한 작업
-<br/>
 
 #### 자료구조 구현 코드
 1. [Set](dataStructure/set/README.md)
