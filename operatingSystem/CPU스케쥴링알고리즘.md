@@ -56,12 +56,12 @@ Ready-Queue 안에 있는 프로세스들중 어느 프로세스를CPU 서비스
     - P1은 0초, P2는 24초, P3는 27초를 기다린셈.
 - Gantt Chart
 
-
     | Process | Burst Time (msec) |
     | --- | --- |
     | P1 | 24 |
     | P2 | 3 |
     | P3 | 3 |
+
 - 호위효과: 선점 시간이 긴 프로세스 뒤를 따르는 것
 - Non-Preemptive Scheduling
 
