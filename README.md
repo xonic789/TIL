@@ -19,10 +19,9 @@
 >
 >[4. Spring](#4-Spring)
 > 1. [Spring 기본](springFramework/springbasic.md)
-> 2. [Spring 핵심 기본]()
-> 3. [Spring MVC 1]()
+> 3. [Spring MVC 1](springFramework/springMVC/spring1.md)
 > 4. [Spring MVC 2]()
-> 5. [Spring 핵심 고급]()
+> 5. [Spring 고급]()
 > 6. [ORM, JPA]()
 > 
 > 
