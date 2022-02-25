@@ -51,3 +51,39 @@
 - `th:attrappend` : 속성 값의 뒤에 값을 추가한다.
 - `th:attrprepend` : 속성 값의 앞에 값을 추가한다.
 - `th:classappend` : class 속성에 자연스럽게 추가한다.
+
+### [반복](src/main/resources/templates/basic/each.html)
+- th:each
+- 반복 및 반복 현재 루프에 대한 상태를 지원한다.
+  **반복 상태 유지 기능**
+  - `index` : 0부터 시작하는 값
+  - `count` : 1부터 시작하는 값
+  - `size` : 전체 사이즈
+  - `even` , odd : 홀수, 짝수 여부( boolean )
+  - `first` , last :처음, 마지막 여부( boolean )
+  - `current` : 현재 객체
+- 참고: 두번째 루프의 상태를 나타내는 변수를 생략 가능
+  - users의 변수명을 user로 했을 때, userStat을 사용 가능.
+
+### [조건부 평가](src/main/resources/templates/basic/condition)
+- `th:if`, `th:unless`
+- 타임리프는 해당 조건이 맞지 않으면 태그 자체를 렌더링하지 않음.
+
+### [주석](src/main/resources/templates/basic/comments.html)
+- 표준 html 주석인 <!-- --> 는 html 코드에서 보인다.
+- 하지만 타임리프 파서 주석코드에서 아예 보이지 않는다.
+- 프로토타입 주석은 html만 열었을시에는 보이지 않지만, 서버를 통해서 열었을 때는 내부에 있는 html 코드가 렌더링된다.
+- 자세한건 html 링크 참조
+
+### [블록](src/main/resources/templates/basic/block.html)
+- `th:block`
+- 어쩔 수 없이 일반적인 반복으로 해결 되지 않는 문제에 사용한다.
+- 타임리프에서 제공하는 태그이며, 랜더링시 사라진다.
+
+### [자바스크립트 인라인](### [블록](src/main/resources/templates/basic/javascript.html)
+- `th:inline`
+- 자바스크립트로 타임리프의 값들을 전달하기 쉽지 않다.
+- 타임리프가 자바스크립트에서 쓸 수 있도록 도와준다.
+- 자바 스크립트에서는 항상 인라인을 사용해야한다.
+- 자바스크립트 인라인 내부에서 타임리프가 제공하는, 즉 th:each 등도 사용 가능!!
+
