@@ -1,7 +1,8 @@
+[variable]: src/main/resources/templates/basic/
 ## Thymeleaf
 - 공식 사이트: https://www.thymeleaf.org/
 
-### [텍스트 - text, utext](src/main/resources/templates/basic/text-basic.html)
+### [텍스트 - text, utext]([variable]text-basic.html)
 - HTML의 콘텐츠(contents)에 데이터를 출력할 때 다음과 같이 `th:text`를 사용하면 된다.
 
 ### [변수 - SpringEL](src/main/resources/templates/basic/text-variable.html)
@@ -80,10 +81,12 @@
 - 어쩔 수 없이 일반적인 반복으로 해결 되지 않는 문제에 사용한다.
 - 타임리프에서 제공하는 태그이며, 랜더링시 사라진다.
 
-### [자바스크립트 인라인](### [블록](src/main/resources/templates/basic/javascript.html)
+### [자바스크립트 인라인](src/main/resources/templates/basic/javascript.html)
 - `th:inline`
 - 자바스크립트로 타임리프의 값들을 전달하기 쉽지 않다.
 - 타임리프가 자바스크립트에서 쓸 수 있도록 도와준다.
 - 자바 스크립트에서는 항상 인라인을 사용해야한다.
 - 자바스크립트 인라인 내부에서 타임리프가 제공하는, 즉 th:each 등도 사용 가능!!
+
+### [템플릿 조각](src/main/resources/templates/basic/)
 

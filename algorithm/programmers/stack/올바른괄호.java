@@ -1,4 +1,4 @@
-package algorithm.programmers;
+package algorithm.programmers.stack;
 
 import java.util.Stack;
 
