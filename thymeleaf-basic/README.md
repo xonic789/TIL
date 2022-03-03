@@ -1,8 +1,7 @@
-[variable]: src/main/resources/templates/basic/
 ## Thymeleaf
 - 공식 사이트: https://www.thymeleaf.org/
 
-### [텍스트 - text, utext]([variable]text-basic.html)
+### [텍스트 - text, utext](src/main/resources/templates/basic/text-basic.html)
 - HTML의 콘텐츠(contents)에 데이터를 출력할 때 다음과 같이 `th:text`를 사용하면 된다.
 
 ### [변수 - SpringEL](src/main/resources/templates/basic/text-variable.html)
@@ -88,5 +87,24 @@
 - 자바 스크립트에서는 항상 인라인을 사용해야한다.
 - 자바스크립트 인라인 내부에서 타임리프가 제공하는, 즉 th:each 등도 사용 가능!!
 
-### [템플릿 조각](src/main/resources/templates/basic/)
+### [템플릿 조각](src/main/resources/templates/template/fragment/fragmentMain.html)
+- 여러 페이지에서 공통으로 사용하는 영역을 템플릿 조각과 레이아웃 기능을 지원한다.
+- `th:fragment="사용할 이름"` 으로 사용.
+  - `th:fragment` 가 있는 태그는 다른 곳에 포함되는 코드 조각으로 이해하면 된다.
+- 파라미터도 넣을 수 있음!
+- 재사용해야 하는 것들은 템플릿 조각을 이용한다.
 
+#### [템플릿 레이아웃1](src/main/resources/templates/template/layout/layoutMain.html)
+- 일부 코드를 가지고 와서 사용하는 템플릿 조각 대신, 개념을 더 확장해서 코드 조각을 레이아웃에 넘겨서 사용하는 방법
+- 예를 들어서 `<head>`에 공통으로 사용하는 `css`,`javascript` 같은 정보들이 있는데, 이러한 공통 정보들을 한 곳에 모아두고, 공통으로 사용하지만, 각 페이지마다 필요한 정보들을 더 추가해서 사용하고 싶다면 ??
+- 레이아웃을 구성하는 어떤 html 파일에 외부의 다른 코드를 주입할 수 있다.
+- `common_header(~{::title},~{::link})` 이 부분이 핵심이다.
+  - `::title` 은 현재 페이지의 title 태그들을 전달한다.
+  - `::link` 는 현재 페이지의 link 태그들을 전달한다.
+- 이 방식은 사실 앞서 배운 코드 조각을 조금 더 적극적으로 사용하는 방식이다. 쉽게 이야기해서 레이아웃 개념을 두고, 그 레이아웃에 필요한 코드 조각을 전달해서 완성하는 것으로 이해하면 된다.
+
+#### [템플릿 레이아웃2](src/main/resources/templates/template/layoutExtend/layoutExtendMain.html)
+- 앞서 템플릿 레이아웃1에선, 태그 내의 태그들만 바꿔치기 했다면,
+- 레이아웃 확장을 적용하면, 외부에서 html 내 지정한 태그들을 외부에서 모조리 바꿔버릴 수 있다.
+- 해당 링크에서, layoutExtendMain.html 에서는 전체 html을 layoutFile.html로 th:replace 하고 있는 걸 볼 수 있는데,
+- 외부에서 필요한 데이터를 전달하면서 layoutFile.html로 변경하는 것을 볼 수 있다.
