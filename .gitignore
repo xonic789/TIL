@@ -1,2 +1,5 @@
 .idea
 out/*
+form/.gradle/vcs-1/gc.properties
+form/.gradle/7.1/dependencies-accessors/dependencies-accessors.lock
+form/.gradle
