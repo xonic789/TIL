@@ -1,4 +1,4 @@
-### 검증
+## 검증
 - 컨트롤러의 중요한 역할중 하나는 HTTP 요청이 정상인지 검증하는 것이다.
 - 클라이언트 검증은 조작 가능하므로 보안에 취약함.
 - 서버만으로 검증하면, 즉각적인 고객 사용성이 부족해짐.
@@ -189,4 +189,116 @@ spring.message.basename=messages,errors
 이 애노테이션이 붙으면 앞서 `WebDataBinder` 에 등록한 검증기를 찾아서 실행한다. 그런데 여러 검증기를<br>
 등록한다면 그 중에 어떤 검증기가 실행되어야 할지 구분이 필요하다. 이때 `supports()` 가 사용된다.<br>
 여기서는 `supports(Item.class)` 호출되고, 결과가 `true` 이므로 `ItemValidator` 의 `validate()` 가
-호출된다.o
+호출된다.
+
+### 검증 방법 V2 - Bean Validation
+#### Bean Validation 의존관계 추가
+`build.gradle`
+```groovy
+implementation 'org.springframework.boot:spring-boot-starter-validation'
+```
+#### Jakarta Bean Validation
+- `jakarta.validation-api`: Bean Validation 인터페이스
+- `hibernate-validator`: 구현체
+
+#### 스프링 MVC는 어떻게 Bean Validator를 사용?
+- 스프링 부트가 `spring-boot-starter-validation`이라는 라이브러리를 넣으면 자동으로 Bean Validator를 인지하고 스프링에 통합한다.
+#### 스프링 부트는 자동으로 글로벌 Validator로 등록한다.
+`LocalValidatorFactoryBean`을 글로벌 Validator로 등록한다. 이 Validator는 `@NotNull` 같은<br>
+애노테이션을 보고 검증을 수행한다. 이렇게 글로벌 Validator가 적용되어 있기 때문에, `@Valid`, `@Validated` 만 적용하면 된다.<br>
+검증 오류가 발생하면, `FieldError` , `ObjectError` 를 생성해서 `BindingResult` 에 담아준다.<br>
+> 검증시 `@Validated` `@Valid` 둘 다 사용 가능하다.<br>
+>`javax.validation.@Valid`를 사용하려면 `build.gradle`의존 관계 추가가 필요하다.<br>
+>`implementation 'org.springframework.boot:spring-boot-starter-validation'`<br>
+> `@Validated` 는 스프링 전용 검증 애노테이션이고, `@Valid` 는 자바 표준 검증 애노테이션이다. <br>
+> 둘중 아무거나 사용해도 동일하게 작동하지만, `@Validated` 는 내부에 groups 라는 기능을 포함하고 있다.
+#### 검증 순서
+1. `@ModelAttribute` 각각의 필드에 타입 변환 시도
+   1. 성공하면 다음으로
+   2. 실패하면 `typeMismatch`로 `FieldError` 추가
+2. Validator 적용<br>
+<br>
+  **바인딩에 성공한 필드만 Bean Validation 적용!!**<br>
+  BeanValidator는 바인딩에 실패한 필드는 BeanValidator를 적용하지 않는다.<br>
+  생각해보면 타입 변환에 성공해서 바인딩에 성공한 필드여야 BeanValidation 적용이 의미 있다.<br>
+  (일단 모델 객체에 바인딩 받는 값이 정상으로 들어와야 검증도 의미가 있음. -> 당연함)<br>
+<br>
+  `@ModelAttribute` -> 각각의 필드 타입 변환시도 -> 변환에 성공한 필드만 BeanValidation 적용!!
+
+### Bean Validation - 에러 코드
+Bean Validation이 기본으로 제공하는 오류 메시지를 좀 더 자세히 변경하고 싶으면 어떻게 할까?
+
+`NotBlank`라는 오류 코드를 기반으로 `MessageCodesResolver`를 통해 다양한 메시지 코드가 순서대로 생성된다.
+
+예)
+**@NotBlank**
+- NotBlank.item.itemName
+- NotBlank.itemName
+- NotBlank.java.lang.String
+- NotBlank
+
+**BeanValidation 메시지 찾는 순서**
+1. 생성된 메시지 코드 순서대로 `messageSource`에서 메시지 찾기
+2. 애노테이션의 `message` 속성 사용 -> `@NotBlank(message = "공백! {0}")`
+3. 라이브러리가 제공하는 기본 값 사용 -> 공백일 수 없습니다.
+
+### Bean Validation - 오브젝트 오류
+`FieldError`가 아닌 해당 오브젝트 관련 오류 (`ObjectError`)는 어떻게 처리할 수 있을까?<br>
+`@ScriptAssert()` 사용!
+```java
+@Data
+@ScriptAssert(lang = "javascript", script = "_this.price * _this.quantity >= 10000", message = "총 합이 10000원 이상이어야 합니다.")
+public class Item {
+  //...
+}
+```
+**메시지 코드**
+- `ScriptAssert.item`
+- `ScriptAssert`<br>
+<br>
+  그런데 실제로 사용해보면 제약이 많고 복잡하다. 실무에는 검증 기능이 해당 객체의 범위를 넘어서는 경우도 종종 등장.<br>
+
+차라리 자바코드로 작성하는게 낫다. `bindingResult.reject()`를 통해 직접 실어주는게 낫다.
+
+### Bean Validation - 한계
+#### 수정시 검증 요구사항
+<br>
+  데이터를 등록할 때와 수정할 때는 요구사항이 다를 수 있다.
+
+- 요구 사항에 따라서, 수정에 적용하려고 Bean Validation 어노테이션을 제거하거나 수정한다
+- 그럼 사이드 이펙트 발생 (아이템 등록에 동일한 요구사항이 적용될 수 없다.)
+- 등록과 수정은 같은 BeanValidation을 적용할 수 없다. 해결 방법은?
+
+### Bean Validation - groups
+동일한 모델 객체를 등록할 때와 수정할 때 각각 다르게 검증하는 방법
+
+#### 방법 2가지
+- BeanValidation의 groups 기능을 사용한다.
+- Item을 직접 사용하지 않고, ItemSaveForm, ItemUpdateForm 같은 폼 전송을 위한 별도의 모델 객체를 만들어서 사용한다.
+
+**BeanValidation groups 기능 사용**<br>
+이런 문제를 해결하기 위해 Bean Validation은 groups라는 기능을 제공.<br>
+예를 들어, 등록시에 검증할 기능과 수정시에 검증할 기능을 각각 그룹으로 나누어 적용할 수 있음.
+
+#### 정리
+- groups 기능을 직접 사용할 일이 별로 없다.
+- 왜냐하면 수정, 추가 폼의 데이터가 다른 경우가 많기 때문이다!!
+
+### Form 전송 객체 분리
+- 추가, 수정 요청에 대해서 핏하게 자바 빈을 만들고, 그 객체를 통해서 검증을 처리하면 groups 등의 추가 기능 없이도 Bean Validator<br>
+- 즉 어노테이션 기반의 검증 처리가 가능하다.
+
+### Bean Validation - HTTP 메시지 컨버터
+`@Valid` , `@Validated` 는 `HttpMessageConverter` ( `@RequestBody` )에도 적용할 수 있다
+
+
+**@ModelAttribute vs @RequestBody**<br>
+HTTP 요청 파리미터를 처리하는 `@ModelAttribute` 는 각각의 필드 단위로 세밀하게 적용된다. 그래서<br>
+특정 필드에 타입이 맞지 않는 오류가 발생해도 나머지 필드는 정상 처리할 수 있었다.<br>
+`HttpMessageConverter` 는 `@ModelAttribute` 와 다르게 각각의 필드 단위로 적용되는 것이 아니라,<br>
+전체 객체 단위로 적용된다.<br>
+따라서 메시지 컨버터의 작동이 성공해서 `Item` 객체를 만들어야 `@Valid` , `@Validated` 가 적용된다.<br>
+- `@ModelAttribute` 는 필드 단위로 정교하게 바인딩이 적용된다. 특정 필드가 바인딩 되지 않아도 나머지<br>
+필드는 정상 바인딩 되고, Validator를 사용한 검증도 적용할 수 있다.<br>
+- `@RequestBody` 는 HttpMessageConverter 단계에서 JSON 데이터를 객체로 변경하지 못하면 이후<br>
+단계 자체가 진행되지 않고 예외가 발생한다. 컨트롤러도 호출되지 않고, Validator도 적용할 수 없다.

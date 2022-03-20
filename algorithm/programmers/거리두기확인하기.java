@@ -17,7 +17,8 @@ public class 거리두기확인하기 {
 
         for (String[] place : places) {
             for (int i = 0; i < 5; i++) {
-
+                for (int j = 0; j < 5; j++) {
+                }
             }
         }
 
