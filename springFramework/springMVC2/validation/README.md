@@ -75,3 +75,118 @@ spring.message.basename=messages,errors
 목표
 - `FieldError`, `ObjectError`는 다루기 너무 번거롭다.
 - 오류 코드도 좀 더 자동화 할 수 있지 않을까? 예) `item.itemName` 처럼?
+
+
+컨트롤러에서 `BindingResult` 는 검증해야 할 객체인 `target` 바로 다음에 온다. 따라서
+  `BindingResult` 는 이미 본인이 검증해야 할 객체인 `target` 을 알고 있다.
+#### `rejectValue()`, `reject()`
+- `BindingResult`가 제공하는 `rejectValue()`, `reject()`를 사용하면 `FieldError`, `ObjectError` 직접 생성하지 않고, 깔끔하게 검증 오류를 다룰 수 있음.
+
+#### 축약된 오류 코드
+- `FieldError()`를 직접 다룰 때는 오류 코드를 `range.item.price`와 같이 모두 입력했다.
+- 그런데 `rejectValue()`를 사용하고 부터는 오류 코드를 `range`로 간단하게 입력했다. 그래도 오류 메시지를 잘 찾아서 출력한다.
+- 무언가 규칙이 있는 것 처럼 보인다. 이 부분을 이해하려면 `MessageCodesResolver`를 이해해야 한다.
+
+### 오류 코드와 메시지 처리 3
+- 오류 코드를 만들 때 다음과 같이 자세히 만들 수도 있고, 
+
+  `required.item.itemName`: 상품 이름은 필수 입니다.
+- 또는 다음과 같이 단순하게 만들 수도 있다.
+
+  `required`: 필수 값 입니다.
+
+단순하게 만들면 범용성이 좋아서 여러곳에서 사용할 수 있지만, 메시지를 세밀하게 작성하기 어렵다. 반대로 너무 자세하게 만들면 범용성이 떨어진다.<br>
+가장 좋은 방법은 범용성으로 사용하다가, 세밀하게 작성해야 하는 경우에는 세밀한 내용이 적용되도록 메시지에 단계를 두는 방법이다.
+
+스프링은 `MessageCodesResolver`라는 것으로 이러한 기능을 지원한다.
+
+### 오류 코드와 메시지 처리 4
+#### MessageCodesResolver
+- 검증 오류 코드로 메시지 코드들을 생성한다.
+- `MessageCodesResolver` 인터페이스이고, `DefaultMessageCodesResolver`는 구현체이다.
+- 주로 다음과 함께 사용 `ObjectError`, `FieldError`
+#### DefaultMessageCodesResolver의 기본 메시지 생성 규칙
+**객체 오류**
+
+```text
+객체 오류의 경우 다음 순서로 2가지 생성
+1.: code + "." + object name
+2.: code
+
+예) 오류 코드: required, object name: item
+1.: required.item
+2.: required
+```
+**필드 오류**
+```text
+필드 오류의 경우 다음 순서로 4가지 메시지 코드 생성
+1.: code + "." + object name + "." + field
+2.: code + "." + field
+3.: code + "." + field type
+4.: code
+
+예) 오류 코드: typeMismatch, object name "user", field "age", field type: int
+1. "typeMismatch.user.age"
+2. "typeMismatch.age"
+3. "typeMismatch.int"
+4. "typeMismatch"
+```
+
+#### 동작 방식
+- `rejectValue()` , `reject()` 는 내부에서 `MessageCodesResolver` 를 사용한다. 여기에서 메시지 코드들을 생성한다.
+- `FieldError` , `ObjectError` 의 생성자를 보면, 오류 코드를 하나가 아니라 여러 오류 코드를 가질 수 있다.
+`MessageCodesResolver` 를 통해서 생성된 순서대로 오류 코드를 보관한다.
+
+#### 오류 메시지 출력
+타임리프 화면을 렌더링 할 때 th:errors 가 실행된다. 만약 이때 오류가 있다면 생성된 오류 메시지
+코드를 순서대로 돌아가면서 메시지를 찾는다. 그리고 없으면 디폴트 메시지를 출력한다.
+
+### 오류 코드와 메시지 처리 5
+
+#### 오류 코드 관리 전략
+**핵심은 구체적인 것에서 덜 구체적인 것으로**<br>
+`MessageCodesResolver`는 `required.item.itemName` 처럼 구체적인 것을 먼저 만들어주고,<br>
+`required`처럼 덜 구체적인 것을 가장 나중에 만든다.<br>
+이렇게 하면 앞서 말한 것 처럼 메시지와 관련된 공통 전략을 편리하게 도입할 수 있다.
+
+**왜 이렇게 복잡하게 사용하는가?**<br>
+모든 오류 코드에 대해서 메시지를 각각 다 정의하면 개발자 입장에서 관리하기 너무 힘들다.<br>
+크게 중요하지 않은 메시지는 범용성 있는 `requried` 같은 메시지로 끝내고, 정말 중요한 메시지는 꼭
+필요할 때 구체적으로 적어서 사용하는 방식이 더 효과적이다.
+
+#### 정리
+1. rejectValue() 호출
+2. MessageCodesResolver 를 사용해서 검증 오류 코드로 메시지 코드들을 생성
+3. new FieldError() 를 생성하면서 메시지 코드들을 보관
+4. th:erros 에서 메시지 코드들로 메시지를 순서대로 메시지에서 찾고, 노출
+
+### 오류 코드와 메시지 처리 6
+#### 스프링이 직접 만든 오류 메시지 처리
+검증 오류 코드는 다음과 같이 2가지로 나눌 수 있다.
+- 개발자가 직접 설정한 오류 코드 -> `rejectValue()`를 직접 호출.
+- 스프링이 직접 검증 오류에 추가한 경우 (주로 타입 정보가 맞지 않음)
+- 스프링은 타입 오류가 발생하면 `typeMismatch`라는 오류 코드를 사용한다. 이 오류 코드가 `MessageCodesResolver`를 통해서 4가지 메시지 코드가 생성되었다.
+  - `typeMismatch.item.price`
+  - `typeMismatch.price`
+  - `typeMismatch.java.lang.Integer `
+  - `typeMismatch`
+- `errors.properties` 즉 message.basename에 설정한 프로퍼티 파일에 `typeMismatch`와 관련된 프로퍼티를 삽입하게 되면, 정상적으로 동작한다.
+
+
+### Validator 분리 1
+- 복잡한 검증 로직을 컨트롤러에서 별도로 분리.
+- `Validator`라는 `interface`를 상속 받은 클래스를 컨트롤러에서 의존성 주입 받아 사용한다.
+
+### Validator 분리 2
+스프링이 Validator 인터페이스를 별도로 제공하는 이유는 체계적으로 검증 기능을 도입하기 위해서다.<br
+그런데 앞에서는 검증기를 직접 불러서 사용했고, 이렇게 사용해도 된다. 그런데 Validator 인터페이스를<br>
+사용해서 검증기를 만들면 스프링의 추가적인 도움을 받을 수 있다.
+
+**WebDataBinder를 통해서 사용하기**<br>
+`WebDataBinder` 는 스프링의 파라미터 바인딩의 역할을 해주고 검증 기능도 내부에 포함한다
+#### 동작 방식
+`@Validated` 는 검증기를 실행하라는 애노테이션이다.<br>
+이 애노테이션이 붙으면 앞서 `WebDataBinder` 에 등록한 검증기를 찾아서 실행한다. 그런데 여러 검증기를<br>
+등록한다면 그 중에 어떤 검증기가 실행되어야 할지 구분이 필요하다. 이때 `supports()` 가 사용된다.<br>
+여기서는 `supports(Item.class)` 호출되고, 결과가 `true` 이므로 `ItemValidator` 의 `validate()` 가
+호출된다.o
