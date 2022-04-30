@@ -1,4 +1,4 @@
-package basicjava.chapter7;
+package basicJava.chapter7;
 
 import java.io.BufferedReader;
 import java.io.IOException;

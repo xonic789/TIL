@@ -1,4 +1,4 @@
-package datastructure.heap;
+package dataStructure.heap;
 
 
 // add 과정 디버깅 할 필요가 있음.

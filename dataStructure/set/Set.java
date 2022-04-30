@@ -1,4 +1,4 @@
-package datastructure.set;
+package dataStructure.set;
 
 /**
  * 기본적인 집합 자료구조 입니다.

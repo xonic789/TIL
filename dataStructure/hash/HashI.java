@@ -1,4 +1,4 @@
-package datastructure.hash;
+package dataStructure.hash;
 
 public interface HashI<K, V> {
 

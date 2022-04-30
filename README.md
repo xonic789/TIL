@@ -2,13 +2,13 @@
 
 >## 0. 목차
 >### 1. JAVA
->   1. [basic Java](basicjava)
+>   1. [basic Java](basicJava)
 >
 >### 2. Data Structure
->   1. [Set](datastructure/set)
->   2. [Linked List](datastructure/list)
->   3. [Hash Table](datastructure/hash)
->   4. [Binary Heap](datastructure/heap)
+>   1. [Set](dataStructure/set)
+>   2. [Linked List](dataStructure/list)
+>   3. [Hash Table](dataStructure/hash)
+>   4. [Binary Heap](dataStructure/heap)
 >
 >
 >### 3. PS
@@ -37,7 +37,7 @@
 > 
 >### 5. CS
 > 1. [Network](network)
-> 2. [Operating System](operatingsystem)
+> 2. [Operating System](operatingSystem)
 > 
 >
 >### 6. DDD(Domain Driven Design)

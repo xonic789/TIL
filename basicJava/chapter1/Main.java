@@ -1,4 +1,4 @@
-package basicjava.chapter1;
+package basicJava.chapter1;
 
 class FishBread {
   private int price;

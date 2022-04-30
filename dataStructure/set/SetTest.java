@@ -1,4 +1,4 @@
-package datastructure.set;
+package dataStructure.set;
 
 public class SetTest {
 

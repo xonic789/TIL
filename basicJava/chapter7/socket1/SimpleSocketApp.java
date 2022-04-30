@@ -1,4 +1,4 @@
-package basicjava.chapter7.socket1;
+package basicJava.chapter7.socket1;
 
 public class SimpleSocketApp {
 

@@ -1,4 +1,4 @@
-package basicjava.chapter2;
+package basicJava.chapter2;
 
 public class StackEx01 {
 

@@ -1,4 +1,4 @@
-package basicjava.chapter5;
+package basicJava.chapter5;
 
 interface MoveAble {
   void 위();
