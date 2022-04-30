@@ -1,4 +1,4 @@
-package basicJava.chapter2;
+package basicjava.chapter2;
 
 class 손님 {
 

@@ -1,4 +1,4 @@
-package dataStructure.heap;
+package datastructure.heap;
 
 public class MaxHeapTest {
 

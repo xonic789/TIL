@@ -1,4 +1,4 @@
-package basicJava.chapter7;
+package basicjava.chapter7;
 
 class SubThread implements Runnable{
 

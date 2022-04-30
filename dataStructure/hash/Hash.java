@@ -1,7 +1,7 @@
-package dataStructure.hash;
+package datastructure.hash;
 
 
-import dataStructure.list.LinkedList;
+import datastructure.list.LinkedList;
 
 import java.util.Iterator;
 

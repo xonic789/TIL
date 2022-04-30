@@ -1,4 +1,4 @@
-package basicJava.chapter7.socket1;
+package basicjava.chapter7.socket1;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

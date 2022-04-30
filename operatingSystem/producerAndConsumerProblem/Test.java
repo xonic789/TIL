@@ -1,4 +1,4 @@
-package operatingSystem.producerAndConsumerProblem;
+package operatingsystem.producerAndConsumerProblem;
 
 import java.util.concurrent.Semaphore;
 

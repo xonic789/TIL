@@ -1,4 +1,4 @@
-package dataStructure.list;
+package datastructure.list;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

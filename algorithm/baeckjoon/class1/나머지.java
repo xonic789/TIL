@@ -1,6 +1,6 @@
 package algorithm.baeckjoon.class1;
 
-import dataStructure.set.Set;
+import datastructure.set.Set;
 
 import java.util.Scanner;
 

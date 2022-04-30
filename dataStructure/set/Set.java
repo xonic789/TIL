@@ -1,6 +1,4 @@
-package dataStructure.set;
-
-import java.util.LinkedHashSet;
+package datastructure.set;
 
 /**
  * 기본적인 집합 자료구조 입니다.

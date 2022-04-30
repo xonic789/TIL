@@ -1,7 +1,6 @@
-package basicJava.chapter7.socket1;
+package basicjava.chapter7.socket1;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ClientFile {

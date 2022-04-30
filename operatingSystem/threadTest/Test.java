@@ -1,4 +1,4 @@
-package operatingSystem.threadTest;
+package operatingsystem.threadTest;
 
 public class Test {
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package basicJava.chapter5;
+package basicjava.chapter5;
 
 abstract class Animal {
   abstract void speak();

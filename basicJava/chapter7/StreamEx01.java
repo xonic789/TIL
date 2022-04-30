@@ -1,6 +1,5 @@
-package basicJava.chapter7;
+package basicjava.chapter7;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 public class StreamEx01 {
