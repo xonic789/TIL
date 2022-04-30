@@ -28,7 +28,7 @@
 >   - [스프링 로그인](springFramework/springMVC2/login)
 >   - [스프링 엑셉션](springFramework/springMVC2/exception)
 >   - [스프링 타입 컨버터](springFramework/springMVC2/typeconverter)
->   - [http multipart/form-data 파일 업로더 및 다운로드](springFramework/springMVC2/uploader)
+>   - [http `multipart/form-data` 파일 업로더 및 다운로드](springFramework/springMVC2/uploader)
 > 5. [Spring 고급](springFramework/springAdvanced)
 >   - [ThreadLocal과 템플릿 메서드 패턴, 전략 패턴, 템플릿 콜백 패턴](springFramework/springAdvanced/advanced)
 >   - [프록시 패턴과 데코레이터 패턴](springFramework/springAdvanced/proxy)
@@ -37,7 +37,6 @@
 > 
 >### 5. CS
 > 1. [Network](network)
->   - [OSI 7계층](network/OSI_Sevenlayer) 
 > 2. [Operating System](operatingsystem)
 > 
 >
