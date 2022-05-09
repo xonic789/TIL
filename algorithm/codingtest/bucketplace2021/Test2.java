@@ -4,7 +4,6 @@ public class Test2 {
 
     public long solution(int[][] beds, int[][] tables, int cost) {
         long answer = 0;
-        Lis
 
         return answer;
     }
