@@ -250,3 +250,43 @@ class Target {}
 > 그런데 스프링 컨테이너가 프록시를 생성하는 시점은 스프링 컨테이너가 만들어지는 애플리케이션 로딩 시점에 적용할 수 있다<br>
 > 따라서 위 3가지 같은 포인트컷 지시자가 있으면 스프링은 모든 스프링 빈에 AOP를 적용하려고 시도하기 때문에 프록시가 없으면 실행 시점에 판단 자체가 불가능.<br>
 > 그래서 이러한 표현식은 최대한 프록시 적용 대상을 축소하는 표현식과 함께 사용해야한다.
+
+
+### @annotation, @args
+#### @annotation
+**정의**<br>
+- `@annotation`: 메서드가 주어진 애노테이션을 가지고 있는 조인 포인트를 매칭
+**설명**<br>
+- `@annotation(com.example.annotation.MethodAop)`
+
+#### @args
+**정의**<br>
+- `@args`: 전달된 실제 인수의 런타임 타입이 주어진 타입의 애노테이션을 갖는 조인포인트
+**설명**<br>
+- 전달된 인수의 런타임 타입에 `@Check` 애노테이션이 있는 경우에 매칭
+- `@args(test.Check)`
+
+### bean
+**정의**<br>
+- `bean`: 스프링 전용 포인트컷 지시자, 빈의 이름으로 지정한다.
+**설명**<br>
+- 스프링 빈의 이름으로 AOP 적용 여부를 지정한다. 스프링에서만 사용할 수 있는 특별한 지시자이다.
+- `bean(orderService) || bean(*Repository)`
+### 매개변수 전달
+**this, target, args, @target, @within, @annotation, @args**
+```java
+@Before("allMember() && args(arg,..)")
+public void logArgs3(String arg) {
+ log.info("[logArgs3] arg={}", arg);
+}
+```
+- 포인트컷의 이름과 매개변수의 이름을 맞추어야 한다. 여기 예제는 `arg`로 맞춤.
+- 추가로 타입이 메서드에 지정한 타입으로 제한됨. 여기서는 메서드 타입이 `String`으로 되어 있기 때문에 다음과 같이 정의됨
+  - `args(arg,..) -> args(String, ..)`
+
+### this, target
+**정의**<br>
+- `this` : 스프링 빈 객체(스프링 AOP 프록시)를 대상으로 하는 조인 포인트
+- `target` : Target 객체(스프링 AOP 프록시가 가르키는 실제 대상)를 대상으로 하는 조인 포인트
+
+#### 프록시 생성 방식에 따른 차이가 있다. 
