@@ -25,6 +25,8 @@
 >   - [스프링 빈 생명주기 콜백과 빈 스코프](https://velog.io/@xonic789/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B9%88-%EC%83%9D%EB%AA%85%EC%A3%BC%EA%B8%B0-%EC%BD%9C%EB%B0%B1%EA%B3%BC-%EB%B9%88-%EC%8A%A4%EC%BD%94%ED%94%84)
 > 2. [Spring MVC 1](springFramework/springMVC)
 >   - [웹 애플리케이션 기초와 스프링](https://velog.io/@xonic789/%EC%9B%B9-%EC%95%B1-%EA%B8%B0%EC%B4%88-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EC%8A%A4%ED%94%84%EB%A7%81)
+>   - [Servlet](https://velog.io/@xonic789/Servlet-javax.servlet)
+>   - [HttpServletRequest, HttpServletResponse](https://velog.io/@xonic789/HttpServletRequest-HttpServletResponse)
 > 3. [Spring MVC 2](springFramework/springMVC2)
 >   - [템플릿엔진 : Thymeleaf](springFramework/springMVC2/thymeleaf-basic)
 >   - [타임리프 스프링 통합과 폼](springFramework/springMVC2/form)
