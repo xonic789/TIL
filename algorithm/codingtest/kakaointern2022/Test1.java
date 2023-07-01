@@ -1,4 +1,4 @@
-package algorithm.codingtest.kakaointern2022;
+package kakaointern2022;
 
 import java.util.HashMap;
 import java.util.Map;

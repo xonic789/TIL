@@ -1,4 +1,4 @@
-package algorithm.codingtest.devCourse;
+package devCourse;
 
 /**
  * 프로그래머스 데브코스 백엔드 과정 1번

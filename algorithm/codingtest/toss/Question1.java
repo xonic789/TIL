@@ -1,4 +1,4 @@
-package algorithm.codingtest.toss;
+package toss;
 
 public class Question1 {
     public long solution(long orderAmount, long taxFreeAmount, long serviceFee) {

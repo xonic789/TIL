@@ -1,4 +1,4 @@
-package algorithm.codingtest.toss;
+package toss;
 import java.util.Stack;
 
 public class Question3 {

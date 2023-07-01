@@ -1,4 +1,4 @@
-package algorithm.codingtest.bucketplace2021;
+package bucketplace2021;
 
 import java.util.ArrayList;
 import java.util.HashMap;

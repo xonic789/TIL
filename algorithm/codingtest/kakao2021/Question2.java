@@ -1,4 +1,4 @@
-package algorithm.codingtest.kakao2021;
+package kakao2021;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package algorithm.codingtest.kakaointern2022;
+package kakaointern2022;
 
 import java.util.*;
 import java.util.stream.Collectors;

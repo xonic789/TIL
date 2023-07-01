@@ -1,4 +1,4 @@
-package algorithm.codingtest.wadiz;
+package wadiz;
 
 import java.util.Arrays;
 
