@@ -8,6 +8,7 @@ import com.fastcampus.payment.payment.presentation.toResponse
 import com.fastcampus.payment.paymentrequest.application.exception.PaymentRequestApplicationException
 import com.fastcampus.payment.paymentrequest.domain.PaymentRequestRepository
 import com.fastcampus.payment.user.domain.UserRepository
+import com.fastcampus.payment.user.domain.exception.UserException
 import com.fastcampus.payment.user.exception.UserApplicationException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -19,7 +20,7 @@ class PaymentService(
     private val paymentRequestRepository: PaymentRequestRepository,
     private val userRepository: UserRepository,
 ) {
-    @Transactional
+    @Transactional(noRollbackFor = [UserException.NotEnoughBalanceException::class])
     fun payment(request: PaymentRequest): PaymentResponse {
         val paymentRequest = paymentRequestRepository.findByIdOrNull(request.requestId)
             ?: throw PaymentRequestApplicationException.NotFoundException()
@@ -31,5 +32,4 @@ class PaymentService(
         service.payment(user, paymentRequest, payment)
         return payment.toResponse()
     }
-
 }
