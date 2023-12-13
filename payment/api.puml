@@ -1,0 +1,135 @@
+@startuml
+
+hide footbox
+
+title API Sequence Flow
+
+actor "가맹점" as m
+actor "유저" as _u
+participant "WAS (PORT:8080)" as was
+participant "Controller" as c
+participant "Service" as s
+participant "PaymentDomainService" as pds
+participant "Repository" as r
+participant "DB" as db
+'entity "Merchant" as me
+entity "PaymentRequest" as pr
+entity "Payment" as p
+entity "User" as u
+entity "UserBalance" as ub
+
+group 결제 요청 생성
+autonumber 1 "(0)"
+    m -> was: POST /api/payment-requests
+     note right m
+            요청
+     end note
+      was -> c: createPaymentRequest()
+      c -> s: createPaymentRequest()
+     activate s
+      s -> r: 가맹점 조회
+      r -> db: 가맹점 조회 쿼리 요청
+      db -> r: 가맹점 조회 쿼리 결과
+      r -> s: 가맹점 조회 결과
+      s -> pr : 결제 요청 Pending 상태 생성
+      s -> r: 결제 요청 Save()
+      s -> p: 결제 Ready 상태 생성
+      s -> r: 결제 저장
+      r -> db: commit()
+      db -> r: commit() 리턴
+      r -> s: commit() 리턴
+      s -> c: 응답 생성
+      c -> was: 응답 반환
+      was -> m: 응답 반환
+    deactivate s
+end
+group 결제 요청 조회
+autonumber 2 "(0)"
+    m -> was: GET /api/payment-requests/{id}
+     note right m
+            요청
+     end note
+      was -> c: getPaymentRequest()
+      c -> s: getPaymentRequest()
+     activate s
+      s -> r: 결제 요청 조회
+      r -> db: 결제 요청 조회 쿼리 요청
+      db -> r: 결제 요청 조회 쿼리 결과
+      r -> s: 결제 요청 조회 결과
+      s -> c: 응답 생성
+      c -> was: 응답 반환
+      was -> m: 응답 반환
+    deactivate s
+end
+group 결제 실행
+autonumber 3 "(0)"
+    _u -> was: POST /api/payments
+     note right _u
+            요청
+     end note
+      was -> c: payment()
+      c -> s: payment()
+     activate s
+      s -> r: 결제 요청 조회
+      r -> db: 결제 요청 조회 쿼리 요청
+      db -> r: 결제 요청 조회 쿼리 결과
+      r -> s: 결제 요청 조회 결과
+      s -> r: 유저 조회
+      r -> db: 유저 조회 쿼리 요청
+      db -> r: 유저 조회 쿼리 결과
+      r -> s: 유저 조회 결과
+      s -> r: 결제 조회
+      r -> db: 결제 조회 쿼리 요청
+      db -> r: 결제 조회 쿼리 결과
+      r -> s: 결제 조회 결과
+      s -> pds: payment()
+      pds -> u: payBalance()
+      u -> ub: pay()
+      ub -> ub: 잔액 검증
+      alt 잔액 부족
+        ub -> ub: 잔액 부족 예외 발생
+        ub -> u: 잔액 부족 예외 발생
+        u -> pds: 잔액 부족 예외 발생
+        pds -> p: 결제 fail()
+        pds -> pr: 결제 요청 fail
+        alt 결제 fail 성공
+        pds -> s: 결제 fail
+        s -> r: 결제 fail
+        r -> db: 결제 fail 쿼리 요청
+        db -> r: 결제 fail 쿼리 결과
+        r -> s: 결제 fail 결과
+        s -> c: 잔액 부족 예외 발생
+        c -> was: 잔액 부족 예외 반환
+        was -> _u: 잔액 부족 예외 반환
+        else 결제 fail 실패
+        rds -> s: 결제 fail
+        s -> c: 결제 fail
+        c -> was: 결제 fail 반환
+        was -> _u: 결제 fail 반환
+        end
+      else 잔액 충분
+        ub -> ub: 잔액 감소
+        ub -> u: 잔액 감소
+        u -> pds: 잔액 감소
+        pds -> p: 결제 success()
+        pds -> pr: 결제 요청 success()
+        alt 결제 success 성공
+        pds -> s: 결제 success
+        s -> r: 결제 success
+        r -> db: 결제 success 쿼리 요청
+        db -> r: 결제 success 쿼리 결과
+        r -> s: 결제 success 결과
+        s -> c: 결제 success
+        c -> was: 결제 success 반환
+        was -> _u: 결제 success 반환
+        else 이미 결제 처리 완료 (FAIL, SUCCESS)
+        rds -> s: 결제 처리 예외
+        s -> c: 결제 처리 예외
+        c -> was: 결제 처리 예외 반환
+        was -> _u: 결제 처리 예외 반환
+        end
+      end
+end
+
+
+@enduml
