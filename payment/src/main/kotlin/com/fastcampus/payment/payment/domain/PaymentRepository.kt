@@ -2,6 +2,8 @@ package com.fastcampus.payment.payment.domain
 
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface PaymentRepository : JpaRepository<Payment, String>
+interface PaymentRepository : JpaRepository<Payment, String> {
 
+    fun findByPaymentRequestId(paymentRequestId: String): Payment?
+}
 

@@ -1,6 +1,7 @@
 package com.fastcampus.payment.payment.domain
 
 import com.fastcampus.payment.domain.Amount
+import com.fastcampus.payment.payment.domain.exception.PaymentException
 import jakarta.persistence.*
 import java.time.ZonedDateTime
 
@@ -15,6 +16,9 @@ class Payment private constructor(
     status: Status,
     createdAt: ZonedDateTime,
     updatedAt: ZonedDateTime,
+    // 결제 가능 만료시간
+    expiredAt: ZonedDateTime,
+    readyAt: ZonedDateTime? = null,
     successAt: ZonedDateTime? = null,
     cancelledAt: ZonedDateTime? = null,
     failedAt: ZonedDateTime? = null,
@@ -41,7 +45,6 @@ class Payment private constructor(
     @AttributeOverrides(
         value = [
             AttributeOverride(name = "value", column = Column(name = "amount_value")),
-            AttributeOverride(name = "tax", column = Column(name = "amount_tax")),
         ]
     )
     var amount: Amount = amount
@@ -72,49 +75,74 @@ class Payment private constructor(
     var failedAt: ZonedDateTime? = failedAt
         protected set
 
-    companion object {
-        fun success(
-            id: String,
-            merchantId: String,
-            amount: Amount,
-            paymentRequestId: String,
-            userId: String
-        ): Payment {
-            return Payment(
-                id = id,
-                merchantId = merchantId,
-                paymentRequestId = paymentRequestId,
-                amount = amount,
-                status = Status.SUCCESS,
-                createdAt = ZonedDateTime.now(),
-                updatedAt = ZonedDateTime.now(),
-                successAt = ZonedDateTime.now(),
-                userId = userId,
-            )
-        }
+    @Column(name = "expired_at")
+    var expiredAt: ZonedDateTime = expiredAt
+        protected set
 
-        fun fail(
+    @Version
+    var version: Int = 0
+        protected set
+
+    fun success(userId: String) {
+        if (isExpired()) {
+            throw PaymentException.ExpiredException()
+        }
+        if (isCompleted()) {
+            throw PaymentException.AlreadyCompletedException()
+        }
+        this.status = Status.SUCCESS
+        this.successAt = ZonedDateTime.now()
+        this.updatedAt = ZonedDateTime.now()
+        this.userId = userId
+    }
+
+    fun fail(userId: String) {
+        this.status = Status.FAILED
+        this.failedAt = ZonedDateTime.now()
+        this.updatedAt = ZonedDateTime.now()
+        this.userId = userId
+    }
+
+    fun amount(): Long {
+        return this.amount.amount()
+    }
+
+    private fun isFailed(): Boolean {
+        return this.status == Status.FAILED && this.failedAt != null
+    }
+
+    fun isCompleted(): Boolean {
+        return this.status == Status.SUCCESS || this.status == Status.FAILED
+    }
+
+    fun isExpired(): Boolean {
+        return this.status == Status.READY && this.expiredAt < ZonedDateTime.now()
+    }
+
+    companion object {
+        fun ready(
             id: String,
             merchantId: String,
             amount: Amount,
             paymentRequestId: String,
-            userId: String
         ): Payment {
+            val now = ZonedDateTime.now()
             return Payment(
                 id = id,
                 merchantId = merchantId,
-                paymentRequestId = paymentRequestId,
                 amount = amount,
-                status = Status.FAILED,
-                createdAt = ZonedDateTime.now(),
-                updatedAt = ZonedDateTime.now(),
-                failedAt = ZonedDateTime.now(),
-                userId = userId,
+                paymentRequestId = paymentRequestId,
+                status = Status.READY,
+                createdAt = now,
+                updatedAt = now,
+                readyAt = now,
+                expiredAt = now.plusMinutes(10),
             )
         }
     }
 
     enum class Status {
+        READY,
         SUCCESS,
         CANCELLED,
         FAILED,

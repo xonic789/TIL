@@ -9,7 +9,6 @@ class UserBalance private constructor(
     id: String,
     user: User,
     balance: Long,
-    version: Int = 0,
 ) {
 
     @Id
@@ -18,7 +17,7 @@ class UserBalance private constructor(
         protected set
 
     @Version
-    var version: Int = version
+    var version: Int = 0
         protected set
 
     fun charge(balance: Long) {

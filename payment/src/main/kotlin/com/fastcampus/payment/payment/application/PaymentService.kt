@@ -1,6 +1,5 @@
 package com.fastcampus.payment.payment.application
 
-import com.fastcampus.payment.infra.UUIDGenerator
 import com.fastcampus.payment.payment.domain.PaymentDomainService
 import com.fastcampus.payment.payment.domain.PaymentRepository
 import com.fastcampus.payment.payment.presentation.PaymentRequest
@@ -18,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional
 class PaymentService(
     private val paymentRepository: PaymentRepository,
     private val paymentRequestRepository: PaymentRequestRepository,
-    private val uuidGenerator: UUIDGenerator,
     private val userRepository: UserRepository,
 ) {
     @Transactional
@@ -27,8 +25,10 @@ class PaymentService(
             ?: throw PaymentRequestApplicationException.NotFoundException()
         val user = userRepository.findByIdOrNull(request.userId)
             ?: throw UserApplicationException.NotFoundException()
+        val payment = paymentRepository.findByPaymentRequestId(paymentRequest.id)
+            ?: throw PaymentRequestApplicationException.NotFoundException()
         val service = PaymentDomainService()
-        val payment = service.payment(user, paymentRequest, uuidGenerator)
+        service.payment(user, paymentRequest, payment)
         return payment.toResponse()
     }
 

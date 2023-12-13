@@ -1,43 +1,32 @@
 package com.fastcampus.payment.payment.domain
 
-import com.fastcampus.payment.interfaces.UUIDGenerator
+import com.fastcampus.payment.payment.domain.exception.PaymentException
 import com.fastcampus.payment.paymentrequest.domain.PaymentRequest
 import com.fastcampus.payment.user.domain.User
-import com.fastcampus.payment.user.domain.exception.UserException
 
 class PaymentDomainService {
 
-    fun payment(user: User, paymentRequest: PaymentRequest, uuidGenerator: UUIDGenerator): Payment {
-        if (paymentRequest.isCompleted()) {
-            return Payment.fail(
-                id = uuidGenerator.generate(),
-                merchantId = paymentRequest.merchantId,
-                amount = paymentRequest.amount,
-                paymentRequestId = paymentRequest.id,
-                userId = user.id,
-            )
+    fun payment(
+        user: User,
+        paymentRequest: PaymentRequest,
+        payment: Payment,
+    ) {
+        val requestAmount = paymentRequest.amount()
+        val amount = payment.amount()
+        if (requestAmount != amount) {
+            payment.fail(user.id)
+            paymentRequest.fail()
+            throw PaymentException.InvalidAmountException()
         }
 
-        val amount = paymentRequest.amount
         try {
-            user.payBalance(amount.amount())
-        } catch (e: UserException.NotEnoughBalanceException) {
+            user.payBalance(amount)
+        } catch (e: Exception) {
+            payment.fail(user.id)
             paymentRequest.fail()
-            return Payment.fail(
-                id = uuidGenerator.generate(),
-                merchantId = paymentRequest.merchantId,
-                amount = amount,
-                paymentRequestId = paymentRequest.id,
-                userId = user.id,
-            )
+            throw e
         }
+        payment.success(user.id)
         paymentRequest.success()
-        return Payment.success(
-            id = uuidGenerator.generate(),
-            merchantId = paymentRequest.merchantId,
-            amount = amount,
-            paymentRequestId = paymentRequest.id,
-            userId = user.id,
-        )
     }
 }

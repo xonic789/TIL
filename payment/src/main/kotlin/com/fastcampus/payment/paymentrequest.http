@@ -21,7 +21,6 @@ Content-Type: application/json
 {
   "requestId": "{{requestId}}",
   "merchantId": "11ee982bb369b970aa864daaa5a26fcc",
-  "amount": 9000,
-  "tax": 1000,
+  "amount": 10000,
   "userId": "11ee982bf1f254c091f76b4ba6b082a2"
 }

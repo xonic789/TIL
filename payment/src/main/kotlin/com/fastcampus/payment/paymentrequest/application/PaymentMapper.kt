@@ -9,5 +9,4 @@ fun PaymentRequest.toResponse(merchantName: String) = PaymentRequestResponse(
     requestId = this.id,
     merchantName = merchantName,
     amount = this.amount.value,
-    tax = this.amount.tax,
 )

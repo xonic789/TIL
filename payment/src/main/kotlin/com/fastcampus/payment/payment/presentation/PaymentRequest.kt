@@ -5,6 +5,5 @@ data class PaymentRequest(
     val requestId: String,
     val userId: String,
     val amount: Long,
-    val tax: Long,
 )
 

@@ -27,7 +27,7 @@ class User private constructor(
     }
 
     fun payBalance(amount: Long) {
-        this.balance!!.pay(amount)
+        balance!!.pay(amount)
     }
 
     companion object {

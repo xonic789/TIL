@@ -1,6 +1,7 @@
 package com.fastcampus.payment.paymentrequest.domain
 
 import com.fastcampus.payment.domain.Amount
+import com.fastcampus.payment.paymentrequest.domain.exception.PaymentRequestException
 import jakarta.persistence.*
 import java.time.ZonedDateTime
 
@@ -15,7 +16,6 @@ class PaymentRequest private constructor(
     successAt: ZonedDateTime? = null,
     createdAt: ZonedDateTime,
     updatedAt: ZonedDateTime,
-    version: Int = 0,
 ) {
     enum class Status {
         PENDING,
@@ -29,7 +29,7 @@ class PaymentRequest private constructor(
         protected set
 
     @Version
-    var version: Int = version
+    var version: Int = 0
         protected set
 
     @Column(name = "merchant_id")
@@ -40,7 +40,6 @@ class PaymentRequest private constructor(
     @AttributeOverrides(
         value = [
             AttributeOverride(name = "value", column = Column(name = "amount_value")),
-            AttributeOverride(name = "tax", column = Column(name = "amount_tax")),
         ]
     )
     var amount: Amount = amount
@@ -68,13 +67,19 @@ class PaymentRequest private constructor(
         protected set
 
     fun fail() {
+        if (this.status != Status.PENDING) throw PaymentRequestException.AlreadyCompletedException()
         this.status = Status.FAILED
         this.failedAt = ZonedDateTime.now()
     }
 
     fun success() {
+        if (this.status != Status.PENDING) throw PaymentRequestException.AlreadyCompletedException()
         this.status = Status.SUCCESS
         this.successAt = ZonedDateTime.now()
+    }
+
+    fun amount(): Long {
+        return this.amount.amount()
     }
 
     companion object {

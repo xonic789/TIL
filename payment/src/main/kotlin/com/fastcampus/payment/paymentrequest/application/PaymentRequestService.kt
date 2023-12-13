@@ -3,6 +3,8 @@ package com.fastcampus.payment.paymentrequest.application
 import com.fastcampus.payment.infra.UUIDGenerator
 import com.fastcampus.payment.merchant.application.exception.MerchantApplicationException
 import com.fastcampus.payment.merchant.domain.MerchantRepository
+import com.fastcampus.payment.payment.domain.Payment
+import com.fastcampus.payment.payment.domain.PaymentRepository
 import com.fastcampus.payment.paymentrequest.application.exception.PaymentRequestApplicationException
 import com.fastcampus.payment.paymentrequest.domain.PaymentRequest
 import com.fastcampus.payment.paymentrequest.domain.PaymentRequestRepository
@@ -17,6 +19,7 @@ class PaymentRequestService(
     private val paymentRequestRepository: PaymentRequestRepository,
     private val uuidGenerator: UUIDGenerator,
     private val merchantRepository: MerchantRepository,
+    private val paymentRepository: PaymentRepository,
 ) {
 
     @Transactional
@@ -29,6 +32,13 @@ class PaymentRequestService(
             merchantId = request.merchantId,
         )
         val paymentRequestSaved = paymentRequestRepository.save(paymentRequest)
+        val payment = Payment.ready(
+            id = uuidGenerator.generate(),
+            paymentRequestId = paymentRequestSaved.id,
+            amount = paymentRequestSaved.amount,
+            merchantId = paymentRequestSaved.merchantId,
+        )
+        paymentRepository.save(payment)
         return paymentRequestSaved.toResponse(merchant.name)
     }
 
