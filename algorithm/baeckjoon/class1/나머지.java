@@ -1,6 +1,6 @@
 package algorithm.baeckjoon.class1;
 
-import dataStructure.set.Set;
+//import dataStructure.set.Set;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class 나머지 {
             arr[i] = sc.nextInt() % 42;
         }
 
-        Set set = new Set(arr);
-        System.out.println(set.getNum());
+//        Set set = new Set(arr);
+//        System.out.println(set.getNum());
     }
 }
