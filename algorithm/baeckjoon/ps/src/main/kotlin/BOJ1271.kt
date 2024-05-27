@@ -40,11 +40,8 @@ fun divideLargeNumbers(dividend: String, divisor: String): Pair<String, String> 
 
     return Pair(quotient, remainder)
 }
-
 fun main() {
-    val (n, m) = readLine()!!.split(" ")
-     divideLargeNumbers(n, m).let {
-        println(it.first)
-        println(it.second)
-     }
+    val (n, m) = readLine()!!.split(" ").map { it.toBigInteger() }
+    println(n / m)
+    println(n % m)
 }
