@@ -48,6 +48,6 @@ public class Test1 {
     public static void main(String[] args) {
         // 투포인터 가자
         int[] grade = {7,4,2,1};
-        System.out.println(new rachelblue.Test1().solution(grade));
+        System.out.println(new Test1().solution(grade));
     }
 }
