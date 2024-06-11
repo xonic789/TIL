@@ -1,5 +1,3 @@
-package algorithm.baeckjoon.ps.src.main.kotlin
-
 import java.math.RoundingMode
 
 class BOJ1271 {

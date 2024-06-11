@@ -1,6 +1,3 @@
-package algorithm.baeckjoon.ps.src.main.kotlin
-
-import ps.src.main.kotlin.BOJ1085
 import java.util.Stack
 
 class BOJ3012 {

@@ -1,5 +1,3 @@
-package ps.src.main.kotlin
-
 import java.util.*
 
 class BOJ1085 {
