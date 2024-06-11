@@ -1,6 +1,5 @@
-package algorithm.baeckjoon.ps.src.main.kotlin
+package algorithm.barkingdog.linkedList.kotlin
 
-import algorithm.barkingdog.linkedList.BOJ_1406_에디터
 import java.util.LinkedList
 
 class BOJ1406 {
