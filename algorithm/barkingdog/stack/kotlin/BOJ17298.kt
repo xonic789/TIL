@@ -1,4 +1,4 @@
-package algorithm.barkingdog.linkedList.kotlin
+package algorithm.barkingdog.stack.kotlin
 
 import java.util.Stack
 
